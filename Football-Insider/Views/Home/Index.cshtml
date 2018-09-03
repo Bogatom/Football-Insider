@@ -1,16 +1,53 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Homepage van Football Insider";
 }
 
 <div class="row">
     <!--Hier komt een foreach-->
-    <div class="col-sm-6 col-md-4">
+    <div class="col-sm-6 col-md-4 article">
         <div class="thumbnail">
-            <img src="https://images.performgroup.com/di/library/GOAL/a5/a5/manchester-united-2018-19_1gtms1n7loczu1is9a3x25pxlt.jpg?t=2098968173" height="150" width="350">
+            <img src="http://images.performgroup.com/di/library/GOAL/69/68/paul-pogba-manchester-united_195e7q16vglec11g0wnrd9wtik.jpg" class="item-image">
             <div class="caption">
                 <h3 class="home-item-title">Manchester United verzuimt tegen Watford</h3>
+
+                <p>
+                    Gepubliceerd: @DateTime.Now.ToShortDateString()
+                    <br />
+                    Reacties: 10
+                </p>
             </div>
         </div>
     </div>
+
+    <div class="col-sm-6 col-md-4 article">
+        <div class="thumbnail">
+            <img src="https://indebuurt.nl/eindhoven/wp-content/uploads/2018/04/psv-kampioen.jpg" class="item-image">
+            <div class="caption">
+                <h3 class="home-item-title">PSV Kampioen van Nederland!</h3>
+
+                <p>
+                    Gepubliceerd: @DateTime.Now.ToShortDateString()
+                    <br />
+                    Reacties: 64
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-4 article">
+        <div class="thumbnail">
+            <img src="https://fhm.nl/wp-content/uploads/2018/03/Neymar-PSG.jpg" class="item-image">
+            <div class="caption">
+                <h3 class="home-item-title">Real Madrid haal Neymar</h3>
+
+                <p>
+                    Gepubliceerd: @DateTime.Now.ToShortDateString()
+                    <br />
+                    Reacties: 64
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!--Hier eindigt de foreach-->
 </div>

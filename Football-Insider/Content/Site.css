@@ -39,7 +39,6 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
     color: #323233;
-    text-transform: uppercase;
 }
 
 .navbar-brand span {
@@ -47,13 +46,13 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 0.1em;
-    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+    font-family: 'Bebas Neue';
 }
 
 .navbar-brand {
     color: #fff;
     font-size: 25px;
-    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+    font-family: 'Bebas Neue';
     font-weight: 700;
     letter-spacing: 0.1em;
 }
@@ -64,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     letter-spacing: 1px;
     color: #fff;
-    font-family: 'Gothic A1', sans-serif;
+    font-family:'Bebas Neue';
 }
 
     .navbar-nav .nav-item .nav-link:hover {
@@ -193,7 +192,64 @@ nav {
     }
 }
 
-.home-item-title{
-    padding-top:10px;
+.home-item-title {
+    padding-top: 10px;
+    font-size: 30px;
+    font-family: 'Bebas Neue';
+    color:white;
+}
+
+a.effect-underline:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    height: 1em;
+    width: 100%;
+    border-bottom: 1px solid;
+    margin-top: 10px;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+}
+
+a.effect-underline:hover:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+h5 a {
+    color: #fff;
     font-size: 25px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-family: 'Dosis', sans-serif;
+}
+
+.menu-item{
+    margin:0px;
+}
+
+.item-image {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.article {
+    background-color: #191919;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0px;
+    border: 2px solid black;
+}
+
+.article:hover {
+    background-color: #313131;
 }
