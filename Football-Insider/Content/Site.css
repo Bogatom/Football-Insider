@@ -235,7 +235,7 @@ h5 a {
 }
 
 .item-image {
-    height: 150px;
+    height: 300px;
     width: 100%;
     object-fit: cover;
     background-repeat: no-repeat;
