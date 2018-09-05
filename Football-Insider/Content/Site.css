@@ -1,6 +1,8 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 20px;
+    background-color:black;
+    height: 1500px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +23,233 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1|Kaushan+Script|Libre+Baskerville|Lobster');
+
+.body {
+    font-family: 'Gothic A1', sans-serif;
+    font-size: 16px;
+}
+
+p {
+    color: #6c6c6f;
+    font-size: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #323233;
+}
+
+.navbar-brand span {
+    color: #fed136;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: 'Bebas Neue';
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 25px;
+    font-family: 'Bebas Neue';
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.navbar-nav .nav-item .nav-link {
+    padding: 1.1em 1em !important;
+    font-size: 120%;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+    font-family:'Bebas Neue';
+}
+
+    .navbar-nav .nav-item .nav-link:hover {
+        color: #fed136;
+    }
+
+.navbar-expand-md .navbar-nav .dropdown-menu {
+    border-top: 3px solid #fed136;
+}
+
+.dropdown-item:hover {
+    background-color: #fed136;
+    color: #fff;
+}
+
+nav {
+    -webkit-transition: padding-top .3s,padding-bottom .3s;
+    -moz-transition: padding-top .3s,padding-bottom .3s;
+    transition: padding-top .3s,padding-bottom .3s;
+    border: none;
+}
+
+.shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #212529;
+}
+
+.banner {
+    background-image: url('http://www.hd-freewallpapers.com/latest-wallpapers/abstract-website-backgrounds.jpg');
+    text-align: center;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.banner-text {
+    padding: 200px 0 150px 0;
+}
+
+.banner-heading {
+    font-family: 'Lobster', cursive;
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 100px;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.banner-sub-heading {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.btn-banner {
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.text-intro {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+
+/* mobile view */
+@media (max-width:500px) {
+    .navbar-nav {
+        background-color: #000;
+        border-top: 3px solid #fed136;
+        color: #fff;
+        z-index: 1;
+        margin-top: 5px;
+    }
+
+        .navbar-nav .nav-item .nav-link {
+            padding: 0.7em 1em !important;
+            font-size: 100%;
+            font-weight: 500;
+        }
+
+    .banner-text {
+        padding: 150px 0 150px 0;
+    }
+
+    .banner-heading {
+        font-size: 30px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+
+    .banner-sub-heading {
+        font-size: 10px;
+        font-weight: 200;
+        line-height: 10px;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width:768px) {
+    .banner-text {
+        padding: 150px 0 150px 0;
+    }
+
+    .banner-sub-heading {
+        font-size: 23px;
+        font-weight: 200;
+        line-height: 23px;
+        margin-bottom: 40px;
+    }
+}
+
+.home-item-title {
+    padding-top: 10px;
+    font-size: 30px;
+    font-family: 'Bebas Neue';
+    color:white;
+}
+
+a.effect-underline:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    height: 1em;
+    width: 100%;
+    border-bottom: 1px solid;
+    margin-top: 10px;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
+}
+
+a.effect-underline:hover:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+h5 a {
+    color: #fff;
+    font-size: 25px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    font-family: 'Dosis', sans-serif;
+}
+
+.menu-item{
+    margin:0px;
+}
+
+.item-image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.article {
+    background-color: #191919;
+    padding: 10px;
+    cursor: pointer;
+    margin: 0px;
+    border: 2px solid black;
+}
+
+.article:hover {
+    background-color: #313131;
 }
