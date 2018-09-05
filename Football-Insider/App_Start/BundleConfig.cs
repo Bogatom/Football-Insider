@@ -26,7 +26,9 @@ namespace Football_Insider
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css"));
+                      "~/Content/Site.css"
+                      ));
+
         }
     }
 }
