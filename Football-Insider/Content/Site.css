@@ -305,3 +305,47 @@ a.effect-underline-title:hover:after {
     -webkit-transform: scale(1);
     transform: scale(1);
 }
+
+.Title-Dashboard {
+    color: #ffffff;
+    font-family: 'Bebas Neue';
+    margin-bottom: 0px;
+}
+
+a.list-group-item{
+    color:#ffffff;
+}
+
+.panel-title{
+    background-color:#313131;
+    color:white;
+    padding: 12px;
+}
+
+h3.panel-title {
+    border-radius: 0.25rem;
+}
+
+.dash-box{
+    text-align: center;
+    color: white;
+    background-color:#fed136;
+    width: 100%;
+}
+
+.well-title{
+    color:black;
+    font-family: 'Bebas Neue';
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+
+h4{
+    color: black;
+    font-family: 'Bebas Neue';
+    padding: 10px;
+}
+
+.fluid-pad{
+    padding:10px;
+}
