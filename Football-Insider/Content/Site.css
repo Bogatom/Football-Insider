@@ -349,3 +349,29 @@ h4{
 .fluid-pad{
     padding:10px;
 }
+
+.blocks{
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+.block-item {
+    border: 2px solid black;
+    padding: 0px;
+    background-color: #fed136;
+    border-radius: 0.25rem;
+    height: 200px;
+    color: black;
+    font-family: 'Bebas Neue';
+    font-size: 40px;
+}
+
+
+
+
+
+.fablo {
+    margin-top: 30px;
+}
