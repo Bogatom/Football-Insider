@@ -199,6 +199,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\CMS\Dashboard.cshtml" />
+    <Content Include="Views\CMS\Articles.cshtml" />
+    <Content Include="Views\CMS\Article\AddArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

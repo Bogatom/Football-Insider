@@ -15,10 +15,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="list-group">                   
-                    <a href="pages.html" class="list-group-item nav-link effect-underline"><span class="fa fa-list" aria-hidden="true"></span> Artikelen</a>
-                    <a href="users.html" class="list-group-item nav-link effect-underline"><span class="fa fa-users" aria-hidden="true"></span> Gebruikers</a>
-                    <a href="posts.html" class="list-group-item nav-link effect-underline"><span class="fa fa-pencil" aria-hidden="true"></span> Competities</a>
+                <div class="list-group">
+                    <a href="@Url.Action("Articles", "CMS")" class="list-group-item nav-link effect-underline">
+                        <span class="fa fa-list" aria-hidden="true"></span>
+                        Artikelen
+                    </a>
+
+                    <a href="@Url.Action("Users", "CMS")" class="list-group-item nav-link effect-underline">
+                        <span class="fa fa-users" aria-hidden="true"></span>
+                        Gebruikers
+                    </a>
+
+                    <a href="@Url.Action("Competitions", "CMS")" class="list-group-item nav-link effect-underline">
+                        <span class="fa fa-pencil" aria-hidden="true"></span>
+                        Competities
+                    </a>
                 </div>               
             </div>
             <div class="col-md-9">

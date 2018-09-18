@@ -13,5 +13,15 @@ namespace Football_Insider.Controllers
         {
             return View();
         }
+
+        public ActionResult Articles()
+        {
+            return View();
+        }
+
+        public ActionResult AddArticle()
+        {
+            return View("~/Views/CMS/Article/AddArticle.cshtml");
+        }
     }
 }
