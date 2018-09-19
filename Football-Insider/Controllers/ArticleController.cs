@@ -9,14 +9,14 @@ namespace Football_Insider.Controllers
     public class ArticleController : Controller
     {
         // GET: Article
-        public ActionResult Articles()
+        public ActionResult AllArticles()
         {
-            return View("~/Views/Articles/AllArticles.cshtml");
+            return View();
         }
 
         public ActionResult AddArticle()
         {
-            return View("~/Views/Articles/AddArticle.cshtml");
+            return View();
         }
     }
 }
