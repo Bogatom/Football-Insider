@@ -1,8 +1,9 @@
-﻿using MDL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 using System.Data.SqlClient;
+using MDL;
 
 namespace DAL.Contexts
 {
@@ -14,7 +15,7 @@ namespace DAL.Contexts
 
         public ArticleDatabaseContext()
         {
-            sqlconnection
+            SqlConnection connection = new SqlConnection();
         }
 
         public IEnumerable<Article> GetAll()
