@@ -6,6 +6,6 @@ namespace DAL
 {
     public enum StorageType
     {
-        Memory, Databse
+        Memory, Database
     }
 }

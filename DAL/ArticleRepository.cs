@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using DAL.Contexts;
+using MDL;
 
 namespace DAL
 {
@@ -11,12 +13,19 @@ namespace DAL
         {
             switch (storagetype)
             {
-                case StorageType.Databse:
-                    throw new NotImplementedException();
+                case StorageType.Database:
+                    context = new ArticleDatabaseContext();
+                    break;
                 case StorageType.Memory:
                     context = new ArticleMemoryContext();
                     break;
             }
         }
+
+        public List<Article> GetAllArticles()
+        {
+            return context.GetAllArticles();
+        }
+
     }
 }

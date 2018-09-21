@@ -7,6 +7,6 @@ namespace DAL.Contexts
 {
     internal interface IArticleContext
     {
-        IEnumerable<Article> GetAll();
+        List<Article> GetAllArticles();
     }
 }
