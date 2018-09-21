@@ -11,6 +11,7 @@ namespace DAL
 
         public ArticleRepositoy(StorageType storagetype)
         {
+            //todo: factory van maken
             switch (storagetype)
             {
                 case StorageType.Database:
