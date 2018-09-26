@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class ArticleLogic
+    public class ArticleLogic : IArticleLogic
     {
-        private ArticleRepositoy repository = new ArticleRepositoy(StorageType.Database);
+        IArticleRepository _repo;
+        private ArticleRepository articleRepository;
+
+        public ArticleLogic(IArticleRepository repo)
+        {
+            _repo = repo;
+        }
 
         public List<Article> GetAllArticles()
         {
-            return repository.GetAllArticles();
+            return _repo.GetAllArticles();
         }
     }
 }

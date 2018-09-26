@@ -10,12 +10,12 @@ namespace Football_Insider.Controllers
 {
     public class ArticleController : Controller
     {
-        private ArticleLogic ALogic = new ArticleLogic();
+        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
 
         public ActionResult AllArticles()
         {
             ArticleViewModel articleViewModel = new ArticleViewModel();
-            articleViewModel.Articles = ALogic.GetAllArticles();
+            articleViewModel.Articles = logic.GetAllArticles();
             return View(articleViewModel);
 
         }

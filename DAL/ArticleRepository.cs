@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using DAL.Contexts;
 using MDL;
 
 namespace DAL
 {
-    public class ArticleRepositoy
+    public class ArticleRepository : IArticleRepository
     {
-        private IArticleContext context;
+        IArticleContext _context;
 
-        public ArticleRepositoy(StorageType storagetype)
+        public ArticleRepository(IArticleContext context)
         {
-            //todo: factory van maken
-            switch (storagetype)
-            {
-                case StorageType.Database:
-                    context = new ArticleDatabaseContext();
-                    break;
-                case StorageType.Memory:
-                    context = new ArticleMemoryContext();
-                    break;
-            }
+            _context = context;
         }
 
         public List<Article> GetAllArticles()
         {
-            return context.GetAllArticles();
+            return _context.GetAllArticles();
         }
-
     }
 }

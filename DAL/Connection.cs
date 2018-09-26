@@ -10,9 +10,23 @@ namespace DAL
 {
     internal class Connection
     {
-        public string Connection()
+        SqlConnection myConnection = new SqlConnection();
+        SqlConnectionStringBuilder myBuilder = new SqlConnectionStringBuilder();
+
+        public Connection()
         {
-            
+            myBuilder.UserID = "dbi384367";
+            myBuilder.Password = "Database8";
+            myBuilder.InitialCatalog = "dbi384367";
+            myBuilder.DataSource = "mssql.fhict.local";
+            myBuilder.PersistSecurityInfo = true;
+            myConnection.ConnectionString = myBuilder.ConnectionString;
+        }
+
+        public string GetConnectionString()
+        {
+            string result = myBuilder.ConnectionString;
+            return result;
         }
     } 
 }
