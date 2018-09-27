@@ -5,6 +5,8 @@
     ViewBag.Title = "Artikelen";
 }
 
+
+
 <section id="breadcrumb">
     <div class="container">
         <ol class="breadcrumb">
@@ -22,6 +24,8 @@
 <br/>
 <section id="TableSection">
     <div class="container">
+        <input class="form-control" id="myInput" type="text" placeholder="Zoeken..">
+        <br/>
         <div id="table" class="table">
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <tr>
@@ -32,9 +36,10 @@
                     <th class="text-center">Bewerken</th>
                     <th class="text-center">Verwijderen</th>
                 </tr>
-                <tr>
-                    @foreach (MDL.Article article in Model.Articles)
-                    {
+                <tbody id="myTable">
+                @foreach (MDL.Article article in Model.Articles)
+                {
+                    <tr>
                         <td class="pt-3-half">@article.ArticleId</td>
                         <td class="pt-3-half">@article.Title</td>
                         <td class="pt-3-half">@article.Category</td>
@@ -49,9 +54,21 @@
                                 <span class="fa fa-times-circle" aria-hidden="true"></span>
                             </button>
                         </td>
-                    }                   
-                </tr>
+                    </tr>
+                }
+                </tbody>
             </table>
         </div>
     </div>
 </section>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
