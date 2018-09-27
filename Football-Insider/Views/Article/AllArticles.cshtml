@@ -22,7 +22,7 @@
 <br />
 <section id="TableSection">
     <div class="container">
-        <div id="table" class="table-editable">
+        <div id="table" class="table">
             <table class="table table-bordered table-responsive-md table-striped text-center">
                 <tr>
                     <th class="text-center">Artikel ID</th>
@@ -35,10 +35,10 @@
                 <tr>
                     @foreach (MDL.Article article in Model.Articles)
                     {
-                        <td class="pt-3-half" contenteditable="true">@article.ArticleId</td>
-                        <td class="pt-3-half" contenteditable="true">@article.Title</td>
-                        <td class="pt-3-half" contenteditable="true">@article.Category</td>
-                        <td class="pt-3-half" contenteditable="true">@article.Content</td>
+                        <td class="pt-3-half">@article.ArticleId</td>
+                        <td class="pt-3-half">@article.Title</td>
+                        <td class="pt-3-half">@article.Category</td>
+                        <td class="pt-3-half">@article.Content</td>
                         <td class="pt-3-half">
                             <button type="button" class="btn btn-info" aria-label="Left Align">
                                 <span class="fa fa-pencil" aria-hidden="true"></span>
