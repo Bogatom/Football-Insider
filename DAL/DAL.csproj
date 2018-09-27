@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="ArticleRepository.cs" />
     <Compile Include="Connection.cs" />
-    <Compile Include="Context\ArticleDatabaseContext.cs" />
-    <Compile Include="Context\ArticleMemoryContext.cs" />
-    <Compile Include="Context\IArticleContext.cs" />
-    <Compile Include="Context\IArticleRepository.cs" />
+    <Compile Include="Context\Article\ArticleDatabaseContext.cs" />
+    <Compile Include="Context\Article\ArticleMemoryContext.cs" />
+    <Compile Include="Context\Article\IArticleContext.cs" />
+    <Compile Include="Context\Article\IArticleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageType.cs" />
   </ItemGroup>
