@@ -8,5 +8,6 @@ namespace DAL.Contexts
     public interface IArticleContext
     {
         List<Article> GetAllArticles();
+        List<Category> GetAllCategories();
     }
 }

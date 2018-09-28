@@ -13,5 +13,10 @@ namespace DAL.Contexts
         {
             throw new NotImplementedException();
         }
+
+        public List<Category> GetAllCategories()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Factory
+namespace BLL
 {
     public interface IArticleLogic
     {
         List<Article> GetAllArticles();
+        List<Category> GetAllCategories();
     }
 }

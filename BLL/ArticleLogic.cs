@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Factory
+namespace BLL
 {
     public class ArticleLogic : IArticleLogic
     {
         IArticleRepository _repo;
-        private ArticleRepository articleRepository;
 
         public ArticleLogic(IArticleRepository repo)
         {
@@ -21,6 +20,11 @@ namespace Factory
         public List<Article> GetAllArticles()
         {
             return _repo.GetAllArticles();
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            return _repo.GetAllCategories();
         }
     }
 }

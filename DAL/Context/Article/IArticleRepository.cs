@@ -10,5 +10,6 @@ namespace DAL
     public interface IArticleRepository
     {
         List<Article> GetAllArticles();
+        List<Category> GetAllCategories();
     }
 }
