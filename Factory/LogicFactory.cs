@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Contexts;
 
-namespace BLL
+namespace Factory
 {
     public class LogicFactory
     {

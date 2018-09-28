@@ -1,4 +1,4 @@
-﻿using BLL;
+﻿using Factory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,6 @@ namespace Football_Insider.Controllers
             ArticleViewModel articleViewModel = new ArticleViewModel();
             articleViewModel.Articles = logic.GetAllArticles();
             return View(articleViewModel);
-
         }
 
         public ActionResult AddArticle()
