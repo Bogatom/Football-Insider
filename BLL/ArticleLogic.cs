@@ -26,5 +26,15 @@ namespace BLL
         {
             return _repo.GetAllCategories();
         }
+
+        public Article AddArticle(BindModel article)
+        {
+            return _repo.AddArticle(article);
+        }
+
+        public Image AddImage(BindModel bindModel)
+        {
+            return _repo.AddImage(bindModel);
+        }
     }
 }

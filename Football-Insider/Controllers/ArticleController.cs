@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Football_Insider.ViewModels;
+using System.IO;
+using MDL;
 
 namespace Football_Insider.Controllers
 {
@@ -22,7 +24,21 @@ namespace Football_Insider.Controllers
 
         public ActionResult AddArticle()
         {
-            categoryViewModel.Categories = logic.GetAllCategories();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddArticle([Bind()] BindModel article)
+        {
+            BindModel NewArticle = new BindModel();
+
+            NewArticle._Article = logic.AddArticle(article);
+
+            if (NewArticle._Article.ArticleId != 0)
+            {
+                Session["Article"] = NewArticle;
+                return RedirectToAction("AddImage", "Image", new { es = NewArticle });
+            }
             return View();
         }
     }

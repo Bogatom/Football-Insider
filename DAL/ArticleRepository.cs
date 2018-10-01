@@ -24,5 +24,15 @@ namespace DAL
         {
             return _context.GetAllCategories();
         }
+
+        public Article AddArticle(BindModel article)
+        {
+            return _context.AddArticle(article);
+        }
+
+        public Image AddImage(BindModel bindModel)
+        {
+            return _context.AddImage(bindModel);
+        }
     }
 }

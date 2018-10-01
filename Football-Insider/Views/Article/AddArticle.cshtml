@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "AddArticle";
-    //todo: Dropdown vullen met database gegevens.
 }
 
 <section id="breadcrumb">
@@ -13,27 +12,24 @@
     </div>
 </section>
 
-@using (@Html.BeginForm("AddProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (@Html.BeginForm("AddArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
-        @Html.LabelFor(model => model.article.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model._Article.Title, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.article.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.article.Title, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model._Article.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model._Article.Title, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.article.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model._Article.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            t
-            @Html.DropDownListFor(model => model.article.Category, new SelectList(ViewModel.CategoryViewModel.CategoryName, "ID", "Name"), "-- Select Product--")
-            @Html.ValidationMessageFor(model => model.article.Title, "", new {@class = "text-danger"})
+            
+            @Html.TextAreaFor(model => model._Article.Content, new { @class = "form-control", @rows = 3 })
+            @Html.ValidationMessageFor(model => model._Article.Content, "", new {@class = "text-danger"})
         </div>
     </div>
-
-
-
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

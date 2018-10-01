@@ -57,6 +57,77 @@ namespace DAL.Contexts
             }
         }
 
+
+        public Article AddArticle(BindModel article)
+        {
+            string query = "Insert INTO Article (Title, Content) " + "Values (@Title, @Content); SELECT SCOPE_IDENTITY()";
+            Article NewArtile = new Article();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.Text,
+                        CommandText = query,
+                        Parameters =
+                        {
+                            new SqlParameter("@Title", article._Article.Title),
+                            new SqlParameter("@Content", article._Article.Content),
+                        }
+                    };
+
+                    NewArtile.ArticleId = Convert.ToInt32(command.ExecuteScalar());
+                    connection.Close();
+                    return NewArtile;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public Image AddImage(BindModel bindModel)
+        {
+            Image NewImage = bindModel._Image;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    string AddImageQuery =
+                        "Insert INTO Files (ImagePath, ArticleId) " + "Values (@ImagePath, @ArticleId)";
+                    SqlCommand addimage = new SqlCommand
+                    {
+                        Connection = connection,
+                        CommandType = CommandType.Text,
+                        CommandText = AddImageQuery,
+                        Parameters =
+                        {
+                            new SqlParameter("@ImagePath", bindModel._Image.ImagePath),
+                            new SqlParameter("@ArticleId", bindModel._Image.ArticleId)
+
+                        }
+                    };
+                    addimage.ExecuteScalar();
+                    connection.Close();
+                    return newImage;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public List<Category> GetAllCategories()
         {
             string query = "SELECT * FROM [Category]";

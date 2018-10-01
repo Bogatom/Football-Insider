@@ -11,5 +11,7 @@ namespace BLL
     {
         List<Article> GetAllArticles();
         List<Category> GetAllCategories();
+        Article AddArticle(BindModel article);
+        Image AddImage(BindModel bindModel);
     }
 }

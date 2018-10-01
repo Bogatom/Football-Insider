@@ -18,5 +18,15 @@ namespace DAL.Contexts
         {
             throw new NotImplementedException();
         }
+
+        public Article AddArticle(BindModel article)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Image AddImage(BindModel bindModel)
+        {
+            throw  new NotImplementedException();
+        }
     }
 }
