@@ -103,7 +103,7 @@ namespace DAL.Contexts
                     connection.Open();
 
                     string AddImageQuery =
-                        "Insert INTO Files (ImagePath, ArticleId) " + "Values (@ImagePath, @ArticleId)";
+                        "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId)";
                     SqlCommand addimage = new SqlCommand
                     {
                         Connection = connection,
@@ -111,14 +111,14 @@ namespace DAL.Contexts
                         CommandText = AddImageQuery,
                         Parameters =
                         {
-                            new SqlParameter("@ImagePath", bindModel._Image.ImagePath),
+                            new SqlParameter("@FilePath", bindModel._Image.ImagePath),
                             new SqlParameter("@ArticleId", bindModel._Image.ArticleId)
 
                         }
                     };
                     addimage.ExecuteScalar();
                     connection.Close();
-                    return newImage;
+                    return NewImage;
                 }
             }
             catch (SqlException e)

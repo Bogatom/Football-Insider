@@ -22,7 +22,7 @@ namespace Football_Insider.Controllers
 
         public ActionResult AddImage([Bind()] BindModel bindModel)
         {
-            Image newimage = new Image();
+            Image newimage = bindModel._Image;
             string filename = Path.GetFileNameWithoutExtension(bindModel._Image.ImageFile.FileName);
             string extention = Path.GetExtension(bindModel._Image.ImageFile.FileName);
             filename = filename + DateTime.Now.ToString("yymmssfff") + extention;
