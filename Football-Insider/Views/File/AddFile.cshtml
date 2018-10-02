@@ -1,41 +1,41 @@
 ﻿@using MDL
-@model  MDL.BindModel
+@model  MDL.FileModel
 
 @{
     ViewBag.Title = "AddImage";
 }
 
 @{
-    var article = Session["Article"] as BindModel;
+    var article = (BindModel)Session["Article"];
 }
 
-@using (Html.BeginForm("AddFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Hidden("ArticleId", article._Article.ArticleId)
-            @Html.LabelFor(model => model._File.Files, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model._File.Files, "", new { @type = "file", @multiple = "multiple" })
-                @Html.ValidationMessageFor(model => model._File.Files, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Upload" class="btn btn-primary" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 text-success">
-                @ViewBag.UploadStatus
-            </div>
-        </div>
-    </div>
-}
+@using (Html.BeginForm("AddFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))  
+{  
+    @Html.AntiForgeryToken()  
+  
+    <div class="form-horizontal">  
+        <hr />  
+        @Html.Hidden("ArticleId", article._Article.ArticleId)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })  
+        <div class="form-group">  
+            @Html.LabelFor(model => model.Files, htmlAttributes: new { @class = "control-label col-md-2" })  
+            <div class="col-md-10">  
+                @Html.TextBoxFor(model => model.Files, "", new { @type = "file", @class = "input-file", @multiple = "multiple" })  
+                @Html.ValidationMessageFor(model => model.Files, "", new { @class = "text-danger" })  
+            </div>  
+        </div>  
+        <div class="form-group">  
+            <div class="col-md-offset-2 col-md-10">  
+                <input type="submit" value="Upload" class="btn btn-primary" />  
+            </div>  
+        </div>  
+        <div class="form-group">  
+            <div class="col-md-offset-2 col-md-10 text-success">  
+                @ViewBag.UploadStatus  
+            </div>  
+        </div>           
+    </div>  
+}  
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>  

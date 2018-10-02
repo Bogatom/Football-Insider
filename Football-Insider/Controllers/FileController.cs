@@ -14,18 +14,17 @@ namespace Football_Insider.Controllers
         private IArticleLogic logic = LogicFactory.CreateArticleLogic();
 
 
-        [HttpGet]
-        public ActionResult AddImage()
+        public ActionResult AddFile()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddFile(HttpPostedFileBase[] files, int ArticleId)
+        public ActionResult AddFile(HttpPostedFileBase[] Files, int ArticleId)
         {
             if (ModelState.IsValid)
             {   //iterating through multiple file collection   
-                foreach (HttpPostedFileBase file in files)
+                foreach (HttpPostedFileBase file in Files)
                 {
                     //Checking file is available to save.  
                     if (file != null)
@@ -37,7 +36,7 @@ namespace Football_Insider.Controllers
 
                         logic.AddFile(file, ArticleId, ServerSavePath);
 
-                        ViewBag.UploadStatus = files.Count().ToString() + " files uploaded successfully.";
+                        ViewBag.UploadStatus = Files.Count().ToString() + " files uploaded successfully.";
                     }
 
                 }
