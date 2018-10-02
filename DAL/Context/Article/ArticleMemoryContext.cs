@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Web;
 
 namespace DAL.Contexts
 {
@@ -24,7 +25,7 @@ namespace DAL.Contexts
             throw new NotImplementedException();
         }
 
-        public Image AddImage(BindModel bindModel)
+        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
             throw  new NotImplementedException();
         }

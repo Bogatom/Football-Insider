@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 
 namespace DAL.Contexts
 {
@@ -10,6 +11,6 @@ namespace DAL.Contexts
         List<Article> GetAllArticles();
         List<Category> GetAllCategories();
         Article AddArticle(BindModel article);
-        Image AddImage(BindModel bindModel);
+        FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
     }
 }

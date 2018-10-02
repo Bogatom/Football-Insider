@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using MDL;
+using System.Web;
 
 namespace DAL.Contexts
 {
@@ -92,33 +93,25 @@ namespace DAL.Contexts
             }
         }
 
-        public Image AddImage(BindModel bindModel)
+        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            Image NewImage = bindModel._Image;
+            string query = "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId); SELECT SCOPE_IDENTITY()";
+            FileModel newFile = new FileModel();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
                     connection.Open();
-
-                    string AddImageQuery =
-                        "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId)";
-                    SqlCommand addimage = new SqlCommand
+                    using (SqlCommand AddFileCommand = new SqlCommand(query, connection))
                     {
-                        Connection = connection,
-                        CommandType = CommandType.Text,
-                        CommandText = AddImageQuery,
-                        Parameters =
-                        {
-                            new SqlParameter("@FilePath", bindModel._Image.ImagePath),
-                            new SqlParameter("@ArticleId", bindModel._Image.ArticleId)
+                        AddFileCommand.Parameters.Add(new SqlParameter("@FilePath", Path));
+                        AddFileCommand.Parameters.Add(new SqlParameter("@ArticleId", ArticleId));
 
-                        }
-                    };
-                    addimage.ExecuteScalar();
+                        AddFileCommand.ExecuteScalar();
+                    }
                     connection.Close();
-                    return NewImage;
+                    return newFile;
                 }
             }
             catch (SqlException e)

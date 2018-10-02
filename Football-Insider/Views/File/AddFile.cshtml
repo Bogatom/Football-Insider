@@ -6,10 +6,10 @@
 }
 
 @{
-    BindModel article = Session["Article"] as BindModel;
+    var article = Session["Article"] as BindModel;
 }
 
-@using (Html.BeginForm("AddImage", "Image", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,11 +17,11 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-           @Html.Hidden("ArticleId", article._Article.ArticleId)
-            @Html.LabelFor(model => model._Image.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Hidden("ArticleId", article._Article.ArticleId)
+            @Html.LabelFor(model => model._File.Files, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model._Image.ImageFile, "", new { @type = "file", @multiple = "multiple" })
-                @Html.ValidationMessageFor(model => model._Image.ImageFile, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model._File.Files, "", new { @type = "file", @multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model._File.Files, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
@@ -34,7 +34,6 @@
                 @ViewBag.UploadStatus
             </div>
         </div>
-
     </div>
 }
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>

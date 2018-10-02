@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Web;
 using DAL.Contexts;
 using MDL;
 
@@ -30,9 +31,9 @@ namespace DAL
             return _context.AddArticle(article);
         }
 
-        public Image AddImage(BindModel bindModel)
+        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            return _context.AddImage(bindModel);
+            return _context.AddFile(file, ArticleId, Path);
         }
     }
 }

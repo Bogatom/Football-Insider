@@ -160,7 +160,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CMSController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,7 +216,7 @@
     <Content Include="Views\CMS\Dashboard.cshtml" />
     <Content Include="Views\Article\AddArticle.cshtml" />
     <Content Include="Views\Article\AllArticles.cshtml" />
-    <Content Include="Views\Image\AddImage.cshtml" />
+    <Content Include="Views\File\AddFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

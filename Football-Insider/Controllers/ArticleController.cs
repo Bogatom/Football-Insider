@@ -37,9 +37,9 @@ namespace Football_Insider.Controllers
             if (NewArticle._Article.ArticleId != 0)
             {
                 Session["Article"] = NewArticle;
-                return RedirectToAction("AddImage", "Image", new { es = NewArticle });
+                return RedirectToAction("AddFile", "File", new {es = NewArticle});
             }
-            return View();
+            return View(article);
         }
     }
 }

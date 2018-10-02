@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BLL
 {
@@ -32,9 +33,9 @@ namespace BLL
             return _repo.AddArticle(article);
         }
 
-        public Image AddImage(BindModel bindModel)
+        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            return _repo.AddImage(bindModel);
+            return _repo.AddFile(file, ArticleId, Path);
         }
     }
 }

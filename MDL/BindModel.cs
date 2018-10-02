@@ -12,7 +12,7 @@ namespace MDL
     {
         public Article _Article { get; set; }
         public Category _Category { get; set; }
-        public Image _Image { get; set; }
+        public FileModel _File { get; set; }
     }
 
     public class Article
@@ -30,15 +30,15 @@ namespace MDL
         public string CategoryName { get; set; }
     }
 
-    public class Image
+    public class FileModel
     {
         public int ArticleId { get; set; }
-        public int ImageID { get; set; }
-        public string ImagePath { get; set; }
+        public int FileId { get; set; }
+        public string FilePath { get; set; }
 
         [Required(ErrorMessage = "Selecteer een bestand.")]
         [Display(Name = "Selecteer een bestand(en)")]
-        public HttpPostedFileBase ImageFile { get; set; }
+        public HttpPostedFileBase[] Files { get; set; }
 
     }
 }
