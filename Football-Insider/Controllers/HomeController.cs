@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL;
+using Football_Insider.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,13 @@ namespace Football_Insider.Controllers
 {
     public class HomeController : Controller
     {
+        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        ArticleViewModel articleViewModel = new ArticleViewModel();
+
         public ActionResult Index()
         {
-            return View();
+            articleViewModel.Articles = logic.GetAllArticles();
+            return View(articleViewModel);
         }
 
         public ActionResult About()

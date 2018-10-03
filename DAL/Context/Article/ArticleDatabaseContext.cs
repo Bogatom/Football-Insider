@@ -37,8 +37,9 @@ namespace DAL.Contexts
                                     ArticleId = Convert.ToInt32(reader["ArticleId"]),
                                     Title = reader["Title"].ToString(),
                                     Category = reader["Category"].ToString(),
+                                    CreationDate = reader["CreationDate"].ToString(),
                                     Content = reader["Content"].ToString(),
-                                    //Image = GetImageForArticle(Convert.ToInt32(reader["Image"]))
+                                    Image = GetImageForArticle(Convert.ToInt32(reader["ArticleId"]))
                                 };
 
                                 model.Add(article);
@@ -54,14 +55,51 @@ namespace DAL.Contexts
             catch (SqlException e)
             {
                 Console.WriteLine(e);
+                //todo: fout afhandelingen tonen in UI
                 throw;
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        internal List<string> GetImageForArticle(int articleId)
+        {
+            Article article = new Article();
+
+            string imageQuery = "SELECT * From Files Where ArticleId = @Id";
+
+            var files = new List<string>();
+
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            {
+                connection.Open();
+                FileModel file = new FileModel();
+                using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
+                {
+                    AddImageForArticle.Parameters.Add(new SqlParameter("@id", articleId));
+                    AddImageForArticle.ExecuteScalar();
+
+                    using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            file.ArticleId = Convert.ToInt32(reader["ArticleId"]);
+                            file.FilePath = (string)reader["FilePath"];
+                            files.Add(file.FilePath.Replace("~", ""));
+                        }
+                    }
+                }     
+            }
+            return files;
         }
 
 
         public Article AddArticle(BindModel article)
         {
-            string query = "Insert INTO Article (Title, Content) " + "Values (@Title, @Content); SELECT SCOPE_IDENTITY()";
+            string query = "Insert INTO Article (Title, Content, CreationDate) " + "Values (@Title, @Content, @CreationDate); SELECT SCOPE_IDENTITY()";
             Article NewArtile = new Article();
 
             try
@@ -69,23 +107,19 @@ namespace DAL.Contexts
                 using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand
+                    using (SqlCommand AddArticleCommand = new SqlCommand(query, connection))
                     {
-                        Connection = connection,
-                        CommandType = CommandType.Text,
-                        CommandText = query,
-                        Parameters =
-                        {
-                            new SqlParameter("@Title", article._Article.Title),
-                            new SqlParameter("@Content", article._Article.Content),
-                        }
-                    };
+                        AddArticleCommand.Parameters.Add(new SqlParameter("@Title", article._Article.Title));
+                        AddArticleCommand.Parameters.Add(new SqlParameter("@Content", article._Article.Content));
+                        AddArticleCommand.Parameters.Add(new SqlParameter("@CreationDate", DateTime.Now));
 
-                    NewArtile.ArticleId = Convert.ToInt32(command.ExecuteScalar());
+                        NewArtile.ArticleId = Convert.ToInt32(AddArticleCommand.ExecuteScalar());
+                    }
                     connection.Close();
                     return NewArtile;
                 }
             }
+                               
             catch (SqlException e)
             {
                 Console.WriteLine(e);
@@ -95,23 +129,22 @@ namespace DAL.Contexts
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            string query = "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId); SELECT SCOPE_IDENTITY()";
-            FileModel newFile = new FileModel();
+            string fileQuery = "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId); SELECT SCOPE_IDENTITY()";
+            FileModel NewFile = new FileModel();
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
                     connection.Open();
-                    using (SqlCommand AddFileCommand = new SqlCommand(query, connection))
+                    using (SqlCommand AddFileCommand = new SqlCommand(fileQuery, connection))
                     {
                         AddFileCommand.Parameters.Add(new SqlParameter("@FilePath", Path));
                         AddFileCommand.Parameters.Add(new SqlParameter("@ArticleId", ArticleId));
-
-                        AddFileCommand.ExecuteScalar();
+                        NewFile.ArticleId = Convert.ToInt32(AddFileCommand.ExecuteScalar());
                     }
                     connection.Close();
-                    return newFile;
+                    return NewFile;
                 }
             }
             catch (SqlException e)

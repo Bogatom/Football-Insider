@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "AddArticle";
 }
+<script src="~/Content/Editor/ckeditor.js"></script>
 
 <section id="breadcrumb">
     <div class="container">
@@ -15,21 +16,21 @@
 @using (@Html.BeginForm("AddArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="form-group">
-        @Html.LabelFor(model => model._Article.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model._Article.Title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.LabelFor(model => model._Article.Title, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model._Article.Title, new { htmlAttributes = new { @class = "form-control col-md-12" } })
             @Html.ValidationMessageFor(model => model._Article.Title, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model._Article.Content, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            
-            @Html.TextAreaFor(model => model._Article.Content, new { @class = "form-control", @rows = 3 })
-            @Html.ValidationMessageFor(model => model._Article.Content, "", new {@class = "text-danger"})
+        @Html.LabelFor(model => model._Article.Content, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model._Article.Content, new { @class = "form-control col-md-12", @rows = 20, @cols = 50 })
+            @Html.ValidationMessageFor(model => model._Article.Content, "", new { @class = "text-danger" })
         </div>
     </div>
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

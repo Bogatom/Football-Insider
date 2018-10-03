@@ -20,6 +20,7 @@ namespace MDL
         public string Title { get; set; }
         public string Category { get; set; }
         public string Content { get; set; }
+        public string CreationDate { get; set; }
         public List<string> Image { get; set; }
     }
 

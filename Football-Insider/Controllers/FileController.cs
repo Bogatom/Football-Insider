@@ -33,9 +33,8 @@ namespace Football_Insider.Controllers
                         var ServerSavePath = Path.Combine(Server.MapPath("~/UploadedFiles/") + InputFileName);
                         //Save file to server folder  
                         file.SaveAs(ServerSavePath);
-
+                        ServerSavePath = "~/UploadedFiles/" + InputFileName;
                         logic.AddFile(file, ArticleId, ServerSavePath);
-
                         ViewBag.UploadStatus = Files.Count().ToString() + " files uploaded successfully.";
                     }
 
