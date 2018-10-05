@@ -195,7 +195,7 @@ namespace DAL.Contexts
 
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
-            string CategoryQuery = "Insert INTO Article (Category) WHERE ArticleId = @ArticleId " + "Values (@Category); SELECT SCOPE_IDENTITY()";
+            string CategoryQuery = "UPDATE Article SET Category = @Category WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
             Category category = new Category();
 
             try
