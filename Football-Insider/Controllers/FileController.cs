@@ -40,7 +40,7 @@ namespace Football_Insider.Controllers
 
                 }
             }
-            return View();
+            return RedirectToAction("AddCategory", "Category", new{ id = ArticleId});
         }
     }
 }

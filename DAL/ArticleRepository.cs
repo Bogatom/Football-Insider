@@ -35,5 +35,10 @@ namespace DAL
         {
             return _context.AddFile(file, ArticleId, Path);
         }
+
+        public Category AddCategoryToArticle(int id, string CategoryName)
+        {
+            return _context.AddCategoryToArticle(id, CategoryName);
+        }
     }
 }

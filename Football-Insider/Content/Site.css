@@ -372,3 +372,7 @@ h4{
 .fablo {
     margin-top: 30px;
 }
+
+option.dropdown-item {
+    color: black;
+}

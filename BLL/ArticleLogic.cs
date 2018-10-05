@@ -37,5 +37,10 @@ namespace BLL
         {
             return _repo.AddFile(file, ArticleId, Path);
         }
+
+        public Category AddCategoryToArticle(int id, string CategoryName)
+        {
+            return _repo.AddCategoryToArticle(id, CategoryName);
+        }
     }
 }

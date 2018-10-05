@@ -13,6 +13,7 @@ namespace BLL
         List<Article> GetAllArticles();
         List<Category> GetAllCategories();
         Article AddArticle(BindModel article);
+        Category AddCategoryToArticle(int id, string CategoryName);
         FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);
     }
 }

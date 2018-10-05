@@ -1,0 +1,41 @@
+﻿@model Football_Insider.ViewModels.CategoryViewModel
+
+@{
+    ViewBag.Title = "AddCategory";
+}
+
+@{
+    var id = Session["ArticleId"];
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active"><h1 class="Title-Dashboard">Categorie Toevoegen</h1></li>
+        </ol>
+        
+        @using (@Html.BeginForm("InsertCategory", "Category", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.Hidden("id", id)
+            <select class="form-control" id="sel1">              
+                @foreach (MDL.Category category in Model.Categories)
+                {
+                    <option class="dropdown-item" href="#">@category.CategoryName</option>
+                }
+            </select>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Toevoegen" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function(){
+        $("#sel1").on("change", function {
+            $("#sel1").val($(this).text());
+        });
+    });
+</script>

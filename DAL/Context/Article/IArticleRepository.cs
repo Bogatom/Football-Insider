@@ -15,5 +15,6 @@ namespace DAL
         List<Category> GetAllCategories();
         Article AddArticle(BindModel article);
         FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
+        Category AddCategoryToArticle(int id, string CategoryName);
     }
 }

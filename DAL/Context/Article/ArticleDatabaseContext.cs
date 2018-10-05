@@ -192,5 +192,32 @@ namespace DAL.Contexts
                 throw;
             }
         }
+
+        public Category AddCategoryToArticle(int id, string CategoryName)
+        {
+            string CategoryQuery = "Insert INTO Article (Category) WHERE ArticleId = @ArticleId " + "Values (@Category); SELECT SCOPE_IDENTITY()";
+            Category category = new Category();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand AddCategoryCommand = new SqlCommand(CategoryQuery, connection))
+                    {
+                        AddCategoryCommand.Parameters.Add(new SqlParameter("@id", id));
+                        AddCategoryCommand.Parameters.Add(new SqlParameter("@Category", CategoryName));
+                        AddCategoryCommand.ExecuteScalar();
+                    }
+                    connection.Close();
+                    return category;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
