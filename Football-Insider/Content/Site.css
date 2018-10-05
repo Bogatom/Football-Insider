@@ -376,3 +376,9 @@ h4{
 option.dropdown-item {
     color: black;
 }
+
+.home-item-category{
+    color: #fed136;
+    font-style: italic;
+    font-family: 'Bebas Neue';
+}
