@@ -52,16 +52,9 @@ namespace DAL.Contexts
                 }
                 return articles;
             }
-            catch (SqlException e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                //todo: fout afhandelingen tonen in UI
-                throw;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                throw sqlException;
             }
         }
 
@@ -70,30 +63,37 @@ namespace DAL.Contexts
             Article article = new Article();
 
             string imageQuery = "SELECT * From Files Where ArticleId = @Id";
-
             var files = new List<string>();
 
-            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            try
             {
-                connection.Open();
-                FileModel file = new FileModel();
-                using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
-                    AddImageForArticle.Parameters.Add(new SqlParameter("@id", articleId));
-                    AddImageForArticle.ExecuteScalar();
-
-                    using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
+                    connection.Open();
+                    FileModel file = new FileModel();
+                    using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
                     {
-                        while (reader.Read())
+                        AddImageForArticle.Parameters.Add(new SqlParameter("@id", articleId));
+                        AddImageForArticle.ExecuteScalar();
+
+                        using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
                         {
-                            file.ArticleId = Convert.ToInt32(reader["ArticleId"]);
-                            file.FilePath = (string)reader["FilePath"];
-                            files.Add(file.FilePath.Replace("~", ""));
+                            while (reader.Read())
+                            {
+                                file.ArticleId = Convert.ToInt32(reader["ArticleId"]);
+                                file.FilePath = (string)reader["FilePath"];
+                                files.Add(file.FilePath.Replace("~", ""));
+                            }
                         }
                     }
-                }     
+                }
+                return files;
             }
-            return files;
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            
         }
 
 
@@ -120,10 +120,9 @@ namespace DAL.Contexts
                 }
             }
                                
-            catch (SqlException e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                throw;
+                throw sqlException;
             }
         }
 
@@ -147,10 +146,9 @@ namespace DAL.Contexts
                     return NewFile;
                 }
             }
-            catch (SqlException e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                throw;
+                throw sqlException;
             }
         }
 
@@ -186,10 +184,9 @@ namespace DAL.Contexts
                 }
                 return categories;
             }
-            catch (SqlException e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                throw;
+                throw sqlException;
             }
         }
 
@@ -213,10 +210,9 @@ namespace DAL.Contexts
                     return category;
                 }
             }
-            catch (SqlException e)
+            catch (SqlException sqlException)
             {
-                Console.WriteLine(e);
-                throw;
+                throw sqlException;
             }
         }
     }
