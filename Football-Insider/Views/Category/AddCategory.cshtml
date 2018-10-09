@@ -1,0 +1,36 @@
+﻿@using System.Activities.Statements
+@model Football_Insider.ViewModels.CategoryViewModel
+
+@{
+    ViewBag.Title = "AddCategory";
+}
+
+@{
+    var id = Session["ArticleId"];
+
+    List<string> categories = new List<string>();
+
+    foreach (MDL.Category categorie in Model.Categories)
+    {
+        categories.Add(categorie.CategoryName);
+    }
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active"><h1 class="Title-Dashboard">Categorie Toevoegen</h1></li>
+        </ol>
+        
+        @using (@Html.BeginForm("InsertCategory", "Category", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.Hidden("id", id)
+            @Html.DropDownList("CategoryName", new SelectList(categories),"Selecteer Categorie", new { @class = "form-control" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Toevoegen" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</section>

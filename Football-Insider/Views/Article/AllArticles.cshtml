@@ -1,0 +1,74 @@
+﻿@model  Football_Insider.ViewModels.ArticleViewModel
+
+
+@{
+    ViewBag.Title = "Artikelen";
+}
+
+
+
+<section id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active"><h1 class="Title-Dashboard">Artikelen</h1></li>
+        </ol>
+    </div>
+</section>
+
+<div class="container">
+    <a href="@Url.Action("AddArticle", "Article")" class="btn btn-primary btn-lg">
+        <span class="fa fa-plus" aria-hidden="true"></span>
+        Toevoegen
+    </a>
+</div>
+<br/>
+<section id="TableSection">
+    <div class="container">
+        <input class="form-control" id="myInput" type="text" placeholder="Zoeken..">
+        <br/>
+        <div id="table" class="table">
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <tr>
+                    <th class="text-center">Artikel ID</th>
+                    <th class="text-center">Titel</th>
+                    <th class="text-center">Categorie</th>
+                    <th class="text-center">Beschrijving</th>
+                    <th class="text-center">Bewerken</th>
+                    <th class="text-center">Verwijderen</th>
+                </tr>
+                <tbody id="myTable">
+                @foreach (MDL.Article article in Model.Articles)
+                {
+                    <tr>
+                        <td class="pt-3-half">@article.ArticleId</td>
+                        <td class="pt-3-half">@article.Title</td>
+                        <td class="pt-3-half">@article.Category</td>
+                        <td class="pt-3-half">@article.Content</td>
+                        <td class="pt-3-half">
+                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                                <span class="fa fa-pencil" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td class="pt-3-half">
+                            <button type="button" class="btn btn-danger" aria-label="Left Align">
+                                <span class="fa fa-times-circle" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

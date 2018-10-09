@@ -1,0 +1,39 @@
+﻿@model  MDL.BindModel
+
+@{
+    ViewBag.Title = "AddArticle";
+}
+
+<section id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active"><h1 class="Title-Dashboard">Artikel Toevoegen</h1></li>
+        </ol>
+    </div>
+</section>
+
+@using (@Html.BeginForm("AddArticle", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model._Article.Title, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.EditorFor(model => model._Article.Title, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+            @Html.ValidationMessageFor(model => model._Article.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model._Article.Content, htmlAttributes: new { @class = "control-label col-md-12" })
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model._Article.Content, new { @class = "form-control col-md-12", @rows = 20, @cols = 50 })
+            @Html.ValidationMessageFor(model => model._Article.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Toevoegen" class="btn btn-primary" />
+        </div>
+    </div>
+}

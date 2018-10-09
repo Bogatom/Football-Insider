@@ -1,53 +1,32 @@
-﻿<!--Model aan roepen van artiklen-->
+﻿@model Football_Insider.ViewModels.ArticleViewModel
 
 @{
     ViewBag.Title = "Homepage van Football Insider";
 }
 
 <div class="row">
-    <!--Hier komt een foreach-->
-    <div class="col-sm-6 col-md-4 article">
-        <div class="thumbnail">
-            <img src="http://images.performgroup.com/di/library/GOAL/69/68/paul-pogba-manchester-united_195e7q16vglec11g0wnrd9wtik.jpg" class="item-image">
-            <div class="caption">
-                <h3 class="home-item-title">Manchester United eenvoudig langs Watford</h3>
+    @foreach (MDL.Article article in Model.Articles)
+    {
+        <div class="col-sm-6 col-md-4 article">
+            <div class="thumbnail">
+                @if (article.Image.Count() == 0)
+                {
+                    <img src="" class="item-image">
+                }
+                else
+                {
+                    <img src="@article.Image.First()" class="item-image">
+                }
+                <div class="caption">
+                    <h3 class="home-item-title">@article.Title</h3>
 
-                <p>
-                    Gepubliceerd: @DateTime.Now.ToShortDateString()
-                    <br />
-                    Reacties: 10
-                </p>
+                    <p>
+                        <span class="fa fa-clock-o" aria-hidden="true"></span> @article.CreationDate
+                        <br />
+                        <h3 class="home-item-category">@article.Category</h3>
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="col-sm-6 col-md-4 article">
-        <div class="thumbnail">
-            <img src="https://indebuurt.nl/eindhoven/wp-content/uploads/2018/04/psv-kampioen.jpg" class="item-image">
-            <div class="caption">
-                <h3 class="home-item-title">PSV Kampioen van Nederland!</h3>
-
-                <p>
-                    Gepubliceerd: @DateTime.Now.ToShortDateString()
-                    <br />
-                    Reacties: 64
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6 col-md-4 article">
-        <div class="thumbnail">
-            <img src="https://fhm.nl/wp-content/uploads/2018/03/Neymar-PSG.jpg" class="item-image">
-            <div class="caption">
-                <h3 class="home-item-title">Real Madrid haalt Neymar</h3>
-                <p>
-                    Gepubliceerd: @DateTime.Now.ToShortDateString()
-                    <br />
-                    Reacties: 32
-                </p>
-            </div>
-        </div>
-    </div>
-    <!--Hier eindigt de foreach-->
+    }
 </div>

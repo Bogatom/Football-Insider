@@ -206,7 +206,7 @@ a.effect-underline:after {
     display: inline-block;
     height: 1em;
     width: 100%;
-    border-bottom: 1px solid;
+    border-bottom: 2px solid;
     margin-top: 10px;
     opacity: 0;
     -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
@@ -252,4 +252,133 @@ h5 a {
 
 .article:hover {
     background-color: #313131;
+}
+
+#Dashboard-Title {
+    font-family: 'Bebas Neue';
+    color: white;
+}
+
+#Dashboard-Block {
+    height: 250px;
+    text-align: center;
+    background-color: #fed136;
+    color: black;
+    border: 2px solid black;
+    display: table;
+}
+
+#Block-Title {
+    display: table-cell;
+    vertical-align: middle;
+    color:black!important;
+    font-size:50px;
+}
+
+#Title-Users{
+    font-family:'Bebas Neue';
+    color: black;
+}
+
+    #Title-Users:hover {
+        cursor: pointer;
+    }
+
+a.effect-underline-title:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    height: 1em;
+    width: 100%;
+    border-bottom: 5px solid;
+    margin-top: 30px;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: scale(0,2);
+    transform: scale(0,2);
+}
+
+a.effect-underline-title:hover:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.Title-Dashboard {
+    color: #ffffff;
+    font-family: 'Bebas Neue';
+    margin-bottom: 0px;
+}
+
+a.list-group-item{
+    color:#ffffff;
+}
+
+.panel-title{
+    background-color:#313131;
+    color:white;
+    padding: 12px;
+}
+
+h3.panel-title {
+    border-radius: 0.25rem;
+}
+
+.dash-box{
+    text-align: center;
+    color: white;
+    background-color:#fed136;
+    width: 100%;
+}
+
+.well-title{
+    color:black;
+    font-family: 'Bebas Neue';
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+
+h4{
+    color: black;
+    font-family: 'Bebas Neue';
+    padding: 10px;
+}
+
+.fluid-pad{
+    padding:10px;
+}
+
+.blocks{
+    text-align: center;
+    padding: 15px;
+}
+
+
+
+.block-item {
+    border: 2px solid black;
+    padding: 0px;
+    background-color: #fed136;
+    border-radius: 0.25rem;
+    height: 200px;
+    color: black;
+    font-family: 'Bebas Neue';
+    font-size: 40px;
+}
+
+
+.fablo {
+    margin-top: 30px;
+}
+
+option.dropdown-item {
+    color: black;
+}
+
+.home-item-category{
+    color: #fed136;
+    font-size: 25px;
+    font-family: 'Bebas Neue';
 }
