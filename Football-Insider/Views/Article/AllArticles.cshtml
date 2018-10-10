@@ -45,9 +45,9 @@
                         <td class="pt-3-half">@article.Category</td>
                         <td class="pt-3-half">@article.Content</td>
                         <td class="pt-3-half">
-                            <button type="button" class="btn btn-info" aria-label="Left Align">
+                            <a href="@Url.Action("EditArticle", "Article", new {articleId = article.ArticleId})" class="btn btn-info">
                                 <span class="fa fa-pencil" aria-hidden="true"></span>
-                            </button>
+                            </a>
                         </td>
                         <td class="pt-3-half">
                             <button type="button" class="btn btn-danger" aria-label="Left Align">

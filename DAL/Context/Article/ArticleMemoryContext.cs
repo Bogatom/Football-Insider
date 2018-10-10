@@ -34,5 +34,20 @@ namespace DAL.Contexts
         {
             throw new NotImplementedException();
         }
+
+        public Article GetCurrentArticle(int articleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Article EditArticle(BindModel EditedArticle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FileModel DeleteFile(int articleId, string image)
+        {
+            throw  new  NotImplementedException();
+        }
     }
 }

@@ -13,5 +13,8 @@ namespace DAL.Contexts
         Article AddArticle(BindModel article);
         FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
         Category AddCategoryToArticle(int id, string CategoryName);
+        Article GetCurrentArticle(int articleId);
+        Article EditArticle(BindModel articleEditedArticle);
+        FileModel DeleteFile(int articleId, string image);
     }
 }

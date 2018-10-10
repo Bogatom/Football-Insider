@@ -42,5 +42,19 @@ namespace Football_Insider.Controllers
             }
             return RedirectToAction("AddCategory", "Category", new{ id = ArticleId});
         }
+
+        public ActionResult EditFile()
+        {
+            return View();
+        }
+
+        public ActionResult DeleteFile(int articleId, string image)
+        {
+            string karakter = "~";
+            image = karakter + image;
+            logic.DeleteFile(articleId, image);
+            //todo: Categorie moet kunnen worden bewerkt.
+            return RedirectToAction("EditFile", "File", new { id = articleId});
+        }
     }
 }

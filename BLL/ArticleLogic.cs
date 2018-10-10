@@ -42,5 +42,20 @@ namespace BLL
         {
             return _repo.AddCategoryToArticle(id, CategoryName);
         }
+
+        public Article GetCurrentArticle(int articleId)
+        {
+            return _repo.GetCurrentArticle(articleId);
+        }
+
+        public Article EditArticle(BindModel EditedArticle)
+        {
+            return _repo.EditArticle(EditedArticle);
+        }
+
+        public FileModel DeleteFile(int articleId, string image)
+        {
+            return _repo.DeleteFile(articleId, image);
+        }
     }
 }

@@ -40,5 +40,20 @@ namespace DAL
         {
             return _context.AddCategoryToArticle(id, CategoryName);
         }
+
+        public Article GetCurrentArticle(int articleId)
+        {
+            return _context.GetCurrentArticle(articleId);
+        }
+
+        public Article EditArticle(BindModel EditedArticle)
+        {
+            return _context.EditArticle(EditedArticle);
+        }
+
+        public FileModel DeleteFile(int articleId, string image)
+        {
+            return _context.DeleteFile(articleId, image);
+        }
     }
 }

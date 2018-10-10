@@ -219,6 +219,8 @@
     <Content Include="Views\Article\AllArticles.cshtml" />
     <Content Include="Views\File\AddFile.cshtml" />
     <Content Include="Views\Category\AddCategory.cshtml" />
+    <Content Include="Views\Article\EditArticle.cshtml" />
+    <Content Include="Views\File\EditFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

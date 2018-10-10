@@ -41,5 +41,24 @@ namespace Football_Insider.Controllers
             }
             return View(article);
         }
+
+        public ActionResult EditArticle(int articleId)
+        {
+            articleViewModel.Article = logic.GetCurrentArticle(articleId);
+            return View(articleViewModel);
+        }
+
+
+        [HttpPost]
+        public ActionResult EditArticle(ArticleViewModel articleViewModel)
+        {
+            BindModel EditedArticle = new BindModel();
+            EditedArticle._Article = articleViewModel.Article;
+            logic.EditArticle(EditedArticle);
+
+
+            Session["EditedArticle"] = EditedArticle;
+            return RedirectToAction("EditFile", "File", new {es = EditedArticle});
+        }
     }
 }

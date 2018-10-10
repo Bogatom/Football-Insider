@@ -219,5 +219,110 @@ namespace DAL.Contexts
                 throw;
             }
         }
+
+        public Article GetCurrentArticle(int articleId)
+        {
+            string ArticleQuery = "SELECT * FROM Article WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
+            Article NewArticle = new Article();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand GetArticleCommand = new SqlCommand(ArticleQuery, connection))
+                    {
+                        GetArticleCommand.Parameters.Add(new SqlParameter("@id", articleId));
+                        using (SqlDataReader reader = GetArticleCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var article = new Article()
+                                {
+                                    ArticleId = Convert.ToInt32(reader["ArticleId"]),
+                                    Title = reader["Title"].ToString(),
+                                    Content = reader["Content"].ToString(),
+                                    Category = reader["Category"].ToString(),
+                                    CreationDate =  reader["CreationDate"].ToString()
+                                };
+                                NewArticle = article;
+                            }
+                        }
+                    }
+                    connection.Close();
+                    return NewArticle;
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public Article EditArticle(BindModel EditedArticle)
+        {
+            string query = "UPDATE Article SET Title = @Title, Content = @Content, CreationDate = @CreationDate WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
+            Article NewArticle = new Article();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand EditArticleCommand = new SqlCommand(query, connection))
+                    {
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@id", EditedArticle._Article.ArticleId));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Title", EditedArticle._Article.Title));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Content", EditedArticle._Article.Content));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@CreationDate", DateTime.Now));
+                        EditArticleCommand.ExecuteScalar();
+                    }
+                    connection.Close();
+
+                    NewArticle.ArticleId  = EditedArticle._Article.ArticleId;
+                    NewArticle.Title = EditedArticle._Article.Title;
+                    NewArticle.Content = EditedArticle._Article.Content;
+                    NewArticle.Image = GetImageForArticle(EditedArticle._Article.ArticleId);
+                    NewArticle.CreationDate = DateTime.Now.ToString();
+
+                    EditedArticle._Article = NewArticle;
+                    return EditedArticle._Article;
+                }
+            }
+
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public FileModel DeleteFile(int articleId, string image)
+        {
+            string DeleteFileQuery = "DELETE FROM Files WHERE ArticleId = @articleId AND FilePath = @FilePath; SELECT SCOPE_IDENTITY()";
+            FileModel fileModel = new FileModel();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand DeleteFileCommand = new SqlCommand(DeleteFileQuery, connection))
+                    {
+                        DeleteFileCommand.Parameters.Add(new SqlParameter("@articleId", articleId));
+                        DeleteFileCommand.Parameters.Add(new SqlParameter("@FilePath", image));
+                        DeleteFileCommand.ExecuteScalar();
+                    }
+                    connection.Close();
+                }
+
+                return fileModel;
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
     }
 }
