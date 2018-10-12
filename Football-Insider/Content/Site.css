@@ -194,9 +194,10 @@ nav {
 
 .home-item-title {
     padding-top: 10px;
-    font-size: 30px;
+    font-size: 25px;
     font-family: 'Bebas Neue';
     color:white;
+    text-shadow: 3px 3px black;
 }
 
 a.effect-underline:after {
@@ -381,4 +382,18 @@ option.dropdown-item {
     color: #fed136;
     font-size: 25px;
     font-family: 'Bebas Neue';
+}
+
+.text-block {
+    position: absolute;
+    margin-top: -24%;
+    background: rgba(0, 0, 0, 0.7);
+    margin-right: 10px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.caption{
+    padding-top: 10px;
 }

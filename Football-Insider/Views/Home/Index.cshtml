@@ -11,15 +11,17 @@
             <div class="thumbnail">
                 @if (article.Image.Count() == 0)
                 {
-                    <img src="" class="item-image">
+                    <img src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" class="item-image">
                 }
                 else
                 {
                     <img src="@article.Image.First()" class="item-image">
+                    <div class="text-block"> 
+                        <h3 class="home-item-title">@article.Title</h3>
+                    </div>
                 }
+                
                 <div class="caption">
-                    <h3 class="home-item-title">@article.Title</h3>
-
                     <p>
                         <span class="fa fa-clock-o" aria-hidden="true"></span> @article.CreationDate
                         <br />
