@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace BLL
+namespace Interfaces_UI_BLL
 {
     public interface IArticleLogic
     {

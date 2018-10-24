@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,9 +54,13 @@
       <Project>{26ab5f99-3159-4f9e-86c1-33a87ac46e1c}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MDL\MDL.csproj">
-      <Project>{0a7cf7ee-e6fe-4e56-85bd-66aa60165364}</Project>
-      <Name>MDL</Name>
+    <ProjectReference Include="..\Interfaces_BLL_DAL\Interfaces_BLL_DAL.csproj">
+      <Project>{f6f1a563-b1cc-42a7-ab38-9e466b11e331}</Project>
+      <Name>Interfaces_BLL_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces_UI_BLL\Interfaces_UI_BLL.csproj">
+      <Project>{369d1f91-eebd-48a9-8e6d-6f42e5eb5770}</Project>
+      <Name>Interfaces_UI_BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -242,13 +242,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{3964D795-E662-4B52-9DA3-32B5A5568179}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Factory\Factory.csproj">
       <Project>{9df605fd-177c-4428-a648-2b4900274d90}</Project>
       <Name>Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces_UI_BLL\Interfaces_UI_BLL.csproj">
+      <Project>{369D1F91-EEBD-48A9-8E6D-6F42E5EB5770}</Project>
+      <Name>Interfaces_UI_BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\MDL\MDL.csproj">
       <Project>{0A7CF7EE-E6FE-4E56-85BD-66AA60165364}</Project>

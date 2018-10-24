@@ -1,4 +1,5 @@
 ﻿using DAL;
+using Interfaces_UI_BLL;
 using MDL;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace BLL
+namespace Factory
 {
     public class ArticleLogic : IArticleLogic
     {
