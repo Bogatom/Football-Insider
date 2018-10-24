@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Contexts;
+using Interfaces_UI_BLL;
 
-namespace BLL
+namespace Factory
 {
     public class LogicFactory
     {

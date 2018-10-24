@@ -7,7 +7,7 @@ using MDL;
 
 namespace DAL
 {
-    public class ArticleRepository : IArticleRepository
+    public class ArticleRepository : Interfaces_UI_BLL.IArticleRepository
     {
         IArticleContext _context;
 

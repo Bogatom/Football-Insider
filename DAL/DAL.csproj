@@ -47,12 +47,14 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Context\Article\ArticleDatabaseContext.cs" />
     <Compile Include="Context\Article\ArticleMemoryContext.cs" />
-    <Compile Include="Context\Article\IArticleContext.cs" />
-    <Compile Include="Context\Article\IArticleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StorageType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Interfaces_BLL_DAL\Interfaces_BLL_DAL.csproj">
+      <Project>{f6f1a563-b1cc-42a7-ab38-9e466b11e331}</Project>
+      <Name>Interfaces_BLL_DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MDL\MDL.csproj">
       <Project>{0A7CF7EE-E6FE-4E56-85BD-66AA60165364}</Project>
       <Name>MDL</Name>

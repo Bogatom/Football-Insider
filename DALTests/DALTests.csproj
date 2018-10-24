@@ -71,6 +71,14 @@
       <Project>{26AB5F99-3159-4F9E-86C1-33A87AC46E1C}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interfaces_BLL_DAL\Interfaces_BLL_DAL.csproj">
+      <Project>{f6f1a563-b1cc-42a7-ab38-9e466b11e331}</Project>
+      <Name>Interfaces_BLL_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces_UI_BLL\Interfaces_UI_BLL.csproj">
+      <Project>{369d1f91-eebd-48a9-8e6d-6f42e5eb5770}</Project>
+      <Name>Interfaces_UI_BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MDL\MDL.csproj">
       <Project>{0A7CF7EE-E6FE-4E56-85BD-66AA60165364}</Project>
       <Name>MDL</Name>
