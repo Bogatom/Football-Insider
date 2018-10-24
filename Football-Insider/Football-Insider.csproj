@@ -188,6 +188,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -219,6 +220,8 @@
     <Content Include="Views\Article\AllArticles.cshtml" />
     <Content Include="Views\File\AddFile.cshtml" />
     <Content Include="Views\Category\AddCategory.cshtml" />
+    <Content Include="Views\Article\EditArticle.cshtml" />
+    <Content Include="Views\File\EditFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

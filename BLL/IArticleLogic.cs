@@ -15,5 +15,8 @@ namespace BLL
         Article AddArticle(BindModel article);
         Category AddCategoryToArticle(int id, string CategoryName);
         FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);
+        Article GetCurrentArticle(int articleId);
+        Article EditArticle(BindModel EditedArticle);
+        FileModel DeleteFile(int articleId, string image);
     }
 }
