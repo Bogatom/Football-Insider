@@ -29,5 +29,19 @@ namespace Football_Insider.Controllers
             bindmodel._Category = logic.AddCategoryToArticle(id, CategoryName);
             return RedirectToAction("Dashboard", "CMS");
         }
+
+        public ActionResult EditCategory(int id)
+        {
+            cateogryViewModel.Categories = logic.GetAllCategories();
+            Session["ArticleId"] = id;
+            return View(cateogryViewModel);
+        }
+
+        public ActionResult EditedCategory(int id, string CategoryName)
+        {
+            BindModel bindmodel = new BindModel();
+            bindmodel._Category = logic.AddCategoryToArticle(id, CategoryName);
+            return RedirectToAction("AllArticles", "Article");
+        }
     }
 }

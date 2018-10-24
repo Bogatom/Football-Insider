@@ -2,7 +2,7 @@
 @model Football_Insider.ViewModels.CategoryViewModel
 
 @{
-    ViewBag.Title = "AddCategory";
+    ViewBag.Title = "EditCategory";
 }
 
 @{
@@ -22,10 +22,11 @@
             <li class="active"><h1 class="Title-Dashboard">Categorie Toevoegen</h1></li>
         </ol>
         
-        @using (@Html.BeginForm("InsertCategory", "Category", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        @using (@Html.BeginForm("EditedCategory", "Category", FormMethod.Post, new {enctype = "multipart/form-data"}))
         {
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
+
                     @Html.Hidden("id", id)
                     @Html.DropDownList("CategoryName", new SelectList(categories), "Selecteer Categorie", new {@class = "form-control"})
                 </div>

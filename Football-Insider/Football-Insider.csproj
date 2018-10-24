@@ -222,6 +222,7 @@
     <Content Include="Views\Category\AddCategory.cshtml" />
     <Content Include="Views\Article\EditArticle.cshtml" />
     <Content Include="Views\File\EditFile.cshtml" />
+    <Content Include="Views\Category\EditCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
