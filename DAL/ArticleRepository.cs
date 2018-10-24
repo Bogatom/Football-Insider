@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using DAL.Contexts;
+using Interfaces_UI_BLL;
 using MDL;
 
 namespace DAL
 {
-    public class ArticleRepository : Interfaces_UI_BLL.IArticleRepository
+    public class ArticleRepository : IArticleRepository
     {
         IArticleContext _context;
 
