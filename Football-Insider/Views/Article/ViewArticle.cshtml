@@ -1,0 +1,17 @@
+﻿@model Football_Insider.ViewModels.ArticleViewModel
+
+
+@{
+    ViewBag.Title = "ViewArticle";
+}
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+<h2 class="ArticleTitle">@Model.Article.Title</h2>
+<span class="fa fa-clock-o" aria-hidden="true" style="font-size:1.171875rem"></span>
+<h5 class="creationDateArticle">@Model.Article.CreationDate</h5> 
+<h5 class="categoryArticle"> @Model.Article.Category</h5>
+
+    <img src="@Model.Article.Image.First()" class="img-fluid singlearticle" alt="Responsive image">
+    <p class="article-content">@Model.Article.Content</p>

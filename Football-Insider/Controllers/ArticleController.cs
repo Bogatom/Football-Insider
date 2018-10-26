@@ -61,5 +61,12 @@ namespace Football_Insider.Controllers
             Session["EditedArticle"] = EditedArticle;
             return RedirectToAction("EditFile", "File", new {es = EditedArticle});
         }
+
+        public ActionResult ViewArticle(int articleId)
+        {
+            articleViewModel.Article = logic.GetCurrentArticle(articleId);
+            return View(articleViewModel);
+        }
+
     }
 }
