@@ -528,3 +528,7 @@ h5.categoryArticle{
     display: inline-block;
     padding-left: 10px;
 }
+
+input#myInput{
+    max-width:100%;
+}

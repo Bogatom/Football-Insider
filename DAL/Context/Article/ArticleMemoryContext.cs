@@ -8,7 +8,7 @@ using System.Web;
 
 namespace DAL.Contexts
 {
-    internal class ArticleMemoryContext : IArticleContext
+    public class ArticleMemoryContext : IArticleContext
     {
         public List<Article> GetAllArticles()
         {
