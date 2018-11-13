@@ -238,7 +238,8 @@ namespace DAL.Contexts
                                     Title = reader["Title"].ToString(),
                                     Content = reader["Content"].ToString(),
                                     Category = reader["Category"].ToString(),
-                                    CreationDate =  reader["CreationDate"].ToString()
+                                    CreationDate =  reader["CreationDate"].ToString(),
+                                    Image = GetImageForArticle(articleId)
                                 };
                                 NewArticle = article;
                             }
