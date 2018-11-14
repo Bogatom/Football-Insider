@@ -321,5 +321,35 @@ namespace DAL.Contexts
             }
         }
 
+        public Article DeleteArticle(int articleId)
+        {
+            Article article = new Article();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        Int32 rowsAffected;
+
+                        cmd.CommandText = "DeleteArticle";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = connection;
+                        cmd.Parameters.Add("@ArticleId", SqlDbType.Int).Value = articleId;
+
+                        connection.Open();
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }               
+                }
+                return article;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+        }
     }
 }

@@ -58,5 +58,10 @@ namespace Factory
         {
             return _repo.DeleteFile(articleId, image);
         }
+
+        public Article DeleteArticle(int articleId)
+        {
+            return _repo.DeleteArticle(articleId);
+        }
     }
 }

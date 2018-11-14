@@ -50,9 +50,12 @@
                             </a>
                         </td>
                         <td class="pt-3-half">
-                            <button type="button" class="btn btn-danger" aria-label="Left Align">
+                            @*<button type="button" class="btn btn-danger" aria-label="Left Align">
                                 <span class="fa fa-times-circle" aria-hidden="true"></span>
-                            </button>
+                            </button>*@
+                            <a href="@Url.Action("DeleteArticle", "Article", new {articleId = article.ArticleId})" class="btn btn-danger">
+                                <span class="fa fa-times-circle" aria-hidden="true"></span>
+                            </a>
                         </td>
                     </tr>
                 }

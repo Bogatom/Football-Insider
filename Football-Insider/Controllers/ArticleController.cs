@@ -68,5 +68,11 @@ namespace Football_Insider.Controllers
             return View(articleViewModel);
         }
 
+        public ActionResult DeleteArticle(int articleId)
+        {
+            logic.DeleteArticle(articleId);
+            return RedirectToAction("AllArticles", "Article");
+        }
+
     }
 }

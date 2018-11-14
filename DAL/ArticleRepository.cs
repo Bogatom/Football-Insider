@@ -56,5 +56,10 @@ namespace DAL
         {
             return _context.DeleteFile(articleId, image);
         }
+
+        public Article DeleteArticle(int articleId)
+        {
+            return _context.DeleteArticle(articleId);
+        }
     }
 }

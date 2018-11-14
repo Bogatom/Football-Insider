@@ -49,5 +49,10 @@ namespace DAL.Contexts
         {
             throw  new  NotImplementedException();
         }
+
+        public Article DeleteArticle(int articleId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
