@@ -34,12 +34,12 @@ namespace DAL.Contexts
                             {
                                 var article = new Article
                                 {
-                                    ArticleId = Convert.ToInt32(reader["ArticleId"]),
+                                    ArticleId = Convert.ToInt32(reader["Article_ID"]),
                                     Title = reader["Title"].ToString(),
-                                    Category = reader["Category"].ToString(),
+                                    Category = reader["Category_ID"].ToString(),
                                     CreationDate = reader["CreationDate"].ToString(),
                                     Content = reader["Content"].ToString(),
-                                    Image = GetImageForArticle(Convert.ToInt32(reader["ArticleId"]))
+                                    Image = GetImageForArticle(Convert.ToInt32(reader["Article_ID"]))
                                 };
 
                                 model.Add(article);
@@ -62,7 +62,7 @@ namespace DAL.Contexts
         {
             Article article = new Article();
 
-            string imageQuery = "SELECT * From Files Where ArticleId = @Id";
+            string imageQuery = "SELECT * From Files Where Article_ID = @Id";
             var files = new List<string>();
 
             try
@@ -80,7 +80,7 @@ namespace DAL.Contexts
                         {
                             while (reader.Read())
                             {
-                                file.ArticleId = Convert.ToInt32(reader["ArticleId"]);
+                                file.ArticleId = Convert.ToInt32(reader["Article_ID"]);
                                 file.FilePath = (string)reader["FilePath"];
                                 files.Add(file.FilePath.Replace("~", ""));
                             }
