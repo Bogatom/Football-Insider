@@ -36,7 +36,7 @@ namespace DAL.Contexts
                                 {
                                     ArticleId = Convert.ToInt32(reader["Article_ID"]),
                                     Title = reader["Title"].ToString(),
-                                    Category = reader["Category_ID"].ToString(),
+                                    Category = GetCategoryForArticle(Convert.ToInt32(reader["Category_ID"])),
                                     CreationDate = reader["CreationDate"].ToString(),
                                     Content = reader["Content"].ToString(),
                                     Image = GetImageForArticle(Convert.ToInt32(reader["Article_ID"]))
@@ -58,11 +58,37 @@ namespace DAL.Contexts
             }
         }
 
+        public string GetCategoryForArticle(int category_id)
+        {
+            Category category = new Category();
+            string categoryQuery = "SELECT * FROM Category WHERE Category_ID = @Category_ID";
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            {
+                connection.Open();
+                FileModel file = new FileModel();
+                using (SqlCommand CateogryCommand = new SqlCommand(categoryQuery, connection))
+                {
+                    CateogryCommand.Parameters.Add(new SqlParameter("@Category_ID", category_id));
+                    CateogryCommand.ExecuteScalar();
+
+                    using (SqlDataReader reader = CateogryCommand.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            category.CategoryId = Convert.ToInt32(reader["Category_ID"]);
+                            category.CategoryName = (string)reader["CategoryName"];
+                        }
+                    }
+                }
+            }
+            return category.CategoryName;
+        }
+
         internal List<string> GetImageForArticle(int articleId)
         {
             Article article = new Article();
 
-            string imageQuery = "SELECT * From Files Where Article_ID = @Id";
+            string imageQuery = "SELECT Article_ID, dbo.[Article_Files].[File_ID], dbo.[Files].FilePath FROM Article_Files INNER JOIN dbo.Files ON dbo.Article_Files.[File_ID] = dbo.Files.[File_ID] AND [Article_Files].[Article_ID] = @Article_ID";
             var files = new List<string>();
 
             try
@@ -73,14 +99,14 @@ namespace DAL.Contexts
                     FileModel file = new FileModel();
                     using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
                     {
-                        AddImageForArticle.Parameters.Add(new SqlParameter("@id", articleId));
+                        AddImageForArticle.Parameters.Add(new SqlParameter("@Article_ID", articleId));
                         AddImageForArticle.ExecuteScalar();
 
                         using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                file.ArticleId = Convert.ToInt32(reader["Article_ID"]);
+                                file.Article_ID = Convert.ToInt32(reader["Article_ID"]);
                                 file.FilePath = (string)reader["FilePath"];
                                 files.Add(file.FilePath.Replace("~", ""));
                             }
@@ -128,21 +154,25 @@ namespace DAL.Contexts
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            string fileQuery = "Insert INTO Files (FilePath, ArticleId) " + "Values (@FilePath, @ArticleId); SELECT SCOPE_IDENTITY()";
             FileModel NewFile = new FileModel();
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
-                    connection.Open();
-                    using (SqlCommand AddFileCommand = new SqlCommand(fileQuery, connection))
+                    using (SqlCommand cmd = new SqlCommand())
                     {
-                        AddFileCommand.Parameters.Add(new SqlParameter("@FilePath", Path));
-                        AddFileCommand.Parameters.Add(new SqlParameter("@ArticleId", ArticleId));
-                        NewFile.ArticleId = Convert.ToInt32(AddFileCommand.ExecuteScalar());
+                        Int32 rowsAffected;
+
+                        cmd.CommandText = "AddFile";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = connection;
+                        cmd.Parameters.Add("@ArticleID", SqlDbType.Int).Value = ArticleId;
+                        cmd.Parameters.Add("@FilePath", SqlDbType.VarChar).Value = Path;
+
+                        connection.Open();
+
+                        rowsAffected = cmd.ExecuteNonQuery();
                     }
-                    connection.Close();
                     return NewFile;
                 }
             }
@@ -170,7 +200,7 @@ namespace DAL.Contexts
                             {
                                 var category = new Category
                                 {
-                                    CategoryId = Convert.ToInt32(reader["CategoryId"]),
+                                    CategoryId = Convert.ToInt32(reader["Category_ID"]),
                                     CategoryName = reader["CategoryName"].ToString(),
                                 };
 
@@ -192,7 +222,7 @@ namespace DAL.Contexts
 
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
-            string CategoryQuery = "UPDATE Article SET Category = @Category WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
+            string CategoryQuery = "UPDATE Article SET Category_ID = (SELECT Category_ID FROM Category WHERE CategoryName = @CategoryName) WHERE Article_ID = @Article_ID; SELECT SCOPE_IDENTITY()";
             Category category = new Category();
 
             try
@@ -202,8 +232,8 @@ namespace DAL.Contexts
                     connection.Open();
                     using (SqlCommand AddCategoryCommand = new SqlCommand(CategoryQuery, connection))
                     {
-                        AddCategoryCommand.Parameters.Add(new SqlParameter("@id", id));
-                        AddCategoryCommand.Parameters.Add(new SqlParameter("@Category", CategoryName));
+                        AddCategoryCommand.Parameters.Add(new SqlParameter("@Article_ID", id));
+                        AddCategoryCommand.Parameters.Add(new SqlParameter("@CategoryName", CategoryName));
                         AddCategoryCommand.ExecuteScalar();
                     }
                     connection.Close();
@@ -218,7 +248,7 @@ namespace DAL.Contexts
 
         public Article GetCurrentArticle(int articleId)
         {
-            string ArticleQuery = "SELECT * FROM Article WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
+            string ArticleQuery = "SELECT * FROM Article WHERE Article_ID = @id; SELECT SCOPE_IDENTITY()";
             Article NewArticle = new Article();
             try
             {
@@ -234,10 +264,10 @@ namespace DAL.Contexts
                             {
                                 var article = new Article()
                                 {
-                                    ArticleId = Convert.ToInt32(reader["ArticleId"]),
+                                    ArticleId = Convert.ToInt32(reader["Article_ID"]),
                                     Title = reader["Title"].ToString(),
                                     Content = reader["Content"].ToString(),
-                                    Category = reader["Category"].ToString(),
+                                    Category = GetCategoryForArticle(Convert.ToInt32(reader["Category_ID"])),
                                     CreationDate =  reader["CreationDate"].ToString(),
                                     Image = GetImageForArticle(articleId)
                                 };
@@ -292,34 +322,7 @@ namespace DAL.Contexts
                 Console.WriteLine(e);
                 throw;
             }
-        }
-
-        public FileModel DeleteFile(int articleId, string image)
-        {
-            string DeleteFileQuery = "DELETE FROM Files WHERE ArticleId = @articleId AND FilePath = @FilePath; SELECT SCOPE_IDENTITY()";
-            FileModel fileModel = new FileModel();
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
-                {
-                    connection.Open();
-                    using (SqlCommand DeleteFileCommand = new SqlCommand(DeleteFileQuery, connection))
-                    {
-                        DeleteFileCommand.Parameters.Add(new SqlParameter("@articleId", articleId));
-                        DeleteFileCommand.Parameters.Add(new SqlParameter("@FilePath", image));
-                        DeleteFileCommand.ExecuteScalar();
-                    }
-                    connection.Close();
-                }
-
-                return fileModel;
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
+        }     
 
         public Article DeleteArticle(int articleId)
         {
@@ -335,7 +338,7 @@ namespace DAL.Contexts
                         cmd.CommandText = "DeleteArticle";
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = connection;
-                        cmd.Parameters.Add("@ArticleId", SqlDbType.Int).Value = articleId;
+                        cmd.Parameters.Add("@Article_ID", SqlDbType.Int).Value = articleId;
 
                         connection.Open();
 

@@ -52,11 +52,6 @@ namespace DAL
             return _context.EditArticle(EditedArticle);
         }
 
-        public FileModel DeleteFile(int articleId, string image)
-        {
-            return _context.DeleteFile(articleId, image);
-        }
-
         public Article DeleteArticle(int articleId)
         {
             return _context.DeleteArticle(articleId);

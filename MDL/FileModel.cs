@@ -10,8 +10,8 @@ namespace MDL
 {
     public class FileModel
     {
-        public int ArticleId { get; set; }
-        public int FileId { get; set; }
+        public int Article_ID { get; set; }
+        public int File_ID { get; set; }
         public string FilePath { get; set; }
 
         [Required(ErrorMessage = "Selecteer een bestand.")]

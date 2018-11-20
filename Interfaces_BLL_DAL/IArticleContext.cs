@@ -15,7 +15,6 @@ namespace DAL.Contexts
         Category AddCategoryToArticle(int id, string CategoryName);
         Article GetCurrentArticle(int articleId);
         Article EditArticle(BindModel articleEditedArticle);
-        FileModel DeleteFile(int articleId, string image);
         Article DeleteArticle(int articleId);
     }
 }

@@ -54,11 +54,6 @@ namespace Factory
             return _repo.EditArticle(EditedArticle);
         }
 
-        public FileModel DeleteFile(int articleId, string image)
-        {
-            return _repo.DeleteFile(articleId, image);
-        }
-
         public Article DeleteArticle(int articleId)
         {
             return _repo.DeleteArticle(articleId);

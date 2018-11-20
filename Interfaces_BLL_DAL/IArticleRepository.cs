@@ -18,7 +18,6 @@ namespace Interfaces_UI_BLL
         Category AddCategoryToArticle(int id, string CategoryName);
         Article GetCurrentArticle(int articleId);
         Article EditArticle(BindModel EditedArticle);
-        FileModel DeleteFile(int articleId, string image);
         Article DeleteArticle(int articleId);
     }
 }

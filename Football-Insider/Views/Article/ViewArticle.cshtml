@@ -1,4 +1,5 @@
-﻿@model Football_Insider.ViewModels.ArticleViewModel
+﻿@using MDL
+@model Football_Insider.ViewModels.ArticleViewModel
 
 
 @{
@@ -6,12 +7,44 @@
 }
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .mySlides {
+        display: none;
+    }
+</style>
 
 <h2 class="ArticleTitle">@Model.Article.Title</h2>
 <span class="fa fa-clock-o" aria-hidden="true" style="font-size:1.171875rem"></span>
-<h5 class="creationDateArticle">@Model.Article.CreationDate</h5> 
+<h5 class="creationDateArticle">@Model.Article.CreationDate</h5>
 <h5 class="categoryArticle"> @Model.Article.Category</h5>
+<div class="w3-content w3-display-container" style="max-width: 100%;">
 
-    <img src="@Model.Article.Image.First()" class="img-fluid singlearticle" alt="Responsive image">
-    <p class="article-content">@Model.Article.Content</p>
+    @foreach (var picture in @Model.Article.Image)
+    {
+        <img class="mySlides" src="@picture" style="width:100%">
+    }
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+<p class="article-content">@Model.Article.Content</p>
+
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+        }
+        x[slideIndex-1].style.display = "block";  
+    }
+</script>

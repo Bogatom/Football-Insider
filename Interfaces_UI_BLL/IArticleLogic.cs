@@ -17,7 +17,6 @@ namespace Interfaces_UI_BLL
         FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);
         Article GetCurrentArticle(int articleId);
         Article EditArticle(BindModel EditedArticle);
-        FileModel DeleteFile(int articleId, string image);
         Article DeleteArticle(int articleId);
     }
 }
