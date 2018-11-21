@@ -18,5 +18,7 @@ namespace Interfaces_UI_BLL
         Article GetCurrentArticle(int articleId);
         Article EditArticle(BindModel EditedArticle);
         Article DeleteArticle(int articleId);
+        FileModel DeleteFile(int ArticleID, int FileID);
+        FileModel GetCurrentFile(int ArticleID, string File);
     }
 }

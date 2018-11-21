@@ -532,3 +532,9 @@ h5.categoryArticle{
 input#myInput{
     max-width:100%;
 }
+
+.w3-content.w3-display-container {
+    margin: 0px;
+    padding: 20px;
+    max-width: 100%;
+}

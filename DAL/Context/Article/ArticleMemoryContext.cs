@@ -54,5 +54,15 @@ namespace DAL.Contexts
         {
             throw new NotImplementedException();
         }
+
+        public FileModel DeleteFile(int ArticleID, int FileID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public FileModel GetCurrentFile(int ArticleID, string File)
+        {
+            throw  new NotImplementedException();
+        }
     }
 }

@@ -9,6 +9,7 @@
     var article = (BindModel)Session["EditedArticle"];
 }
 
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
@@ -21,19 +22,22 @@
 </section>
 
 <div class="w3-content w3-display-container">
-@foreach (var image in article._Article.Image)
-{
-    <img class="mySlides" src="@image" style="width:100%">
-}
-    <a href="@Url.Action("DeleteFile", "File", new {articleId = article._Article.ArticleId, image = article._Article.Image.First()})" class="btn btn-danger">
-        <span class="fa fa-times-circle" aria-hidden="true"></span> Verwijder Afbeelding
-    </a>
-    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-</div>
+
+    <ul class="list-group">
+        @foreach (var image in article._Article.Image)
+        {
+            <li class="list-group-item">
+                <img class="mySlides" src="@image" style="width: 20%"/>
+                <a href="@Url.Action("DeleteFile", "File", new {articleId = article._Article.ArticleId, File = image})" class="btn btn-danger" style="margin: 10px">
+                    <span class="fa fa-times-circle" aria-hidden="true"></span> Verwijder @image
+                </a>
+            </li>
+        }
+    </ul>
+    </div>
 
 
-@using (Html.BeginForm("EditFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -67,26 +71,3 @@
     </div>
 </div>
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-<script>
-    var slideIndex = 1;
-    showDivs(slideIndex);
-
-    function plusDivs(n) {
-        showDivs(slideIndex += n);
-    }
-
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = x.length }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex - 1].style.display = "block";
-    }
-</script>

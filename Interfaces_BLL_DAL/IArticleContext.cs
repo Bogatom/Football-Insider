@@ -16,5 +16,7 @@ namespace DAL.Contexts
         Article GetCurrentArticle(int articleId);
         Article EditArticle(BindModel articleEditedArticle);
         Article DeleteArticle(int articleId);
+        FileModel DeleteFile(int ArticleID, int FileID);
+        FileModel GetCurrentFile(int ArticleID, string File);
     }
 }

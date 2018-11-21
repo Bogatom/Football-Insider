@@ -47,6 +47,13 @@ namespace Football_Insider.Controllers
         public ActionResult EditFile()
         {
             return View();
-        }      
+        }
+
+        public ActionResult DeleteFile(int ArticleID, string File)
+        {
+            FileModel fileModel = logic.GetCurrentFile(ArticleID, File);           
+            logic.DeleteFile(ArticleID, fileModel.File_ID);
+            return RedirectToAction("EditFile", "File");
+        }
     }
 }

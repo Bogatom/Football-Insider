@@ -58,5 +58,15 @@ namespace Factory
         {
             return _repo.DeleteArticle(articleId);
         }
+
+        public FileModel DeleteFile(int ArticleID, int FileID)
+        {
+            return _repo.DeleteFile(ArticleID, FileID);
+        }
+
+        public FileModel GetCurrentFile(int ArticleID, string File)
+        {
+            return _repo.GetCurrentFile(ArticleID, File);
+        }
     }
 }

@@ -122,7 +122,6 @@ namespace DAL.Contexts
             
         }
 
-
         public Article AddArticle(BindModel article)
         {
             string query = "Insert INTO Article (Title, Content, CreationDate) " + "Values (@Title, @Content, @CreationDate); SELECT SCOPE_IDENTITY()";
@@ -269,7 +268,7 @@ namespace DAL.Contexts
                                     Content = reader["Content"].ToString(),
                                     Category = GetCategoryForArticle(Convert.ToInt32(reader["Category_ID"])),
                                     CreationDate =  reader["CreationDate"].ToString(),
-                                    Image = GetImageForArticle(articleId)
+                                    Image = GetImageForArticle(Convert.ToInt32(reader["Article_ID"]))
                                 };
                                 NewArticle = article;
                             }
@@ -288,7 +287,7 @@ namespace DAL.Contexts
 
         public Article EditArticle(BindModel EditedArticle)
         {
-            string query = "UPDATE Article SET Title = @Title, Content = @Content, CreationDate = @CreationDate WHERE ArticleId = @id; SELECT SCOPE_IDENTITY()";
+            string query = "UPDATE Article SET Title = @Title, Content = @Content, CreationDate = @CreationDate WHERE Article_ID = @Article_ID; SELECT SCOPE_IDENTITY()";
             Article NewArticle = new Article();
 
             try
@@ -298,7 +297,7 @@ namespace DAL.Contexts
                     connection.Open();
                     using (SqlCommand EditArticleCommand = new SqlCommand(query, connection))
                     {
-                        EditArticleCommand.Parameters.Add(new SqlParameter("@id", EditedArticle._Article.ArticleId));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Article_ID", EditedArticle._Article.ArticleId));
                         EditArticleCommand.Parameters.Add(new SqlParameter("@Title", EditedArticle._Article.Title));
                         EditArticleCommand.Parameters.Add(new SqlParameter("@Content", EditedArticle._Article.Content));
                         EditArticleCommand.Parameters.Add(new SqlParameter("@CreationDate", DateTime.Now));
@@ -353,6 +352,72 @@ namespace DAL.Contexts
                 throw;
             }
 
+        }
+
+        public FileModel DeleteFile(int ArticleID, int FileID)
+        {
+            FileModel fileModel = new FileModel();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        Int32 rowsAffected;
+
+                        cmd.CommandText = "DeleteFile";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Connection = connection;
+                        cmd.Parameters.Add("@Article_ID", SqlDbType.Int).Value = ArticleID;
+                        cmd.Parameters.Add("@File_ID", SqlDbType.Int).Value = FileID;
+
+                        connection.Open();
+
+                        rowsAffected = cmd.ExecuteNonQuery();
+                    }
+                }
+
+                return fileModel;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public FileModel GetCurrentFile(int ArticleID, string File)
+        {
+            FileModel fileModel = new FileModel();
+            try
+            {
+                    string fileQuery = "SELECT Files.[File_ID] FROM Files INNER JOIN Article_Files ON Files.[File_ID] = Article_Files.[File_ID] WHERE Article_Files.[Article_ID] = @Article_ID AND Files.[FilePath] = @FilePath";
+                    using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                    {
+                        connection.Open();
+                        FileModel file = new FileModel();
+                        using (SqlCommand FileCommand = new SqlCommand(fileQuery, connection))
+                        {
+                            FileCommand.Parameters.Add(new SqlParameter("@Article_ID", ArticleID));
+                            FileCommand.Parameters.Add(new SqlParameter("@FilePath", "~"+File));
+                            FileCommand.ExecuteScalar();
+
+                            using (SqlDataReader reader = FileCommand.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    fileModel.File_ID = Convert.ToInt32(reader["File_ID"]);
+                                }
+                            }
+                        }
+                        return fileModel;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

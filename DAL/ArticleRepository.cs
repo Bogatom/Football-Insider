@@ -56,5 +56,16 @@ namespace DAL
         {
             return _context.DeleteArticle(articleId);
         }
+
+        public FileModel DeleteFile(int ArticleID, int FileID)
+        {
+            return _context.DeleteFile(ArticleID, FileID);
+        }
+
+        public FileModel GetCurrentFile(int ArticleID, string File)
+        {
+            return _context.GetCurrentFile(ArticleID, File);
+        }
+
     }
 }
