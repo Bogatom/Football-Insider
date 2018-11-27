@@ -24,7 +24,7 @@ namespace DAL.Contexts.Tests
             List<Article> AllArticles = logic.GetAllArticles();
 
             //Act
-            int expected = 3;
+            int expected = 1;
             int actual = AllArticles.Count();
 
             //Assert
@@ -41,11 +41,11 @@ namespace DAL.Contexts.Tests
             //Arrange
             BindModel article = new BindModel();
             List<Article> Articles = new List<Article>();
-            Articles.Add(article._Article);
+            context.AddArticle(article);
 
             //Act
             int expected = 1;
-            int actual = Articles.Count;
+            int actual = context.GetAllArticles().Count;
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -102,38 +102,40 @@ namespace DAL.Contexts.Tests
 
             List<Article> Articles = new List<Article>();
 
+            int ArticleID = 117;
+
             Article article = new Article();
-            article = logic.GetCurrentArticle(117);
-            Articles.Add(article);
+            article = logic.GetCurrentArticle(ArticleID);           
 
             //Act
-            int actual = Articles.Count;
-            int expected = 1;
+            int actual = article.ArticleId;
 
             //Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(ArticleID, actual);
         }
 
         [TestMethod()]
         public void EditArticle()
         {
-            //Arrange
-            IArticleContext context = new ArticleDatabaseContext();
-            ArticleRepository repo = new ArticleRepository(context);
-            ArticleLogic logic = new ArticleLogic(repo);
+            ////Arrange
+            //IArticleContext context = new ArticleDatabaseContext();
+            //ArticleRepository repo = new ArticleRepository(context);
+            //ArticleLogic logic = new ArticleLogic(repo);
 
-            BindModel article = new BindModel();
-            Article oldContent = logic.GetCurrentArticle(117);
+            //Article article = new Article();
 
-            string oldArticleContent = oldContent.Content;
-            string newArticleContent = "BLABLABLABLAB";
+            //article = logic.GetCurrentArticle(117);
+            //Article oldContent = logic.EditArticle(article.ArticleId);
 
-            //Act
-            string actual = oldArticleContent;
-            string expected = newArticleContent;
+            //string oldArticleContent = oldContent.Content;
+            //string newArticleContent = "BLABLABLABLAB";
 
-            //Assert
-            Assert.AreNotEqual(expected, actual);
+            ////Act
+            //string actual = oldArticleContent;
+            //string expected = newArticleContent;
+
+            ////Assert
+            //Assert.AreNotEqual(expected, actual);
         }
     }
 }

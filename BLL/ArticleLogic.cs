@@ -3,6 +3,7 @@ using Interfaces_UI_BLL;
 using MDL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,15 @@ namespace Factory
 
         public List<Article> GetAllArticles()
         {
-            return _repo.GetAllArticles();
+            try
+            {
+                return _repo.GetAllArticles();
+            }
+            catch (Exception sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
         }
 
         public List<Category> GetAllCategories()

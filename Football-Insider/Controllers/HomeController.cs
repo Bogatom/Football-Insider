@@ -2,6 +2,7 @@
 using Football_Insider.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,8 +18,16 @@ namespace Football_Insider.Controllers
 
         public ActionResult Index()
         {
-            articleViewModel.Articles = logic.GetAllArticles();
-            return View(articleViewModel);
+            try
+            {
+                articleViewModel.Articles = logic.GetAllArticles();
+                return View(articleViewModel);
+            }
+            catch (Exception sqlException)
+            {
+                return View(sqlException.Message);
+            }
+            
         }
 
         public ActionResult About()

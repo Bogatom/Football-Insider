@@ -56,6 +56,10 @@ namespace DAL.Contexts
             {
                 throw sqlException;
             }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
 
         public string GetCategoryForArticle(int category_id)
@@ -108,7 +112,7 @@ namespace DAL.Contexts
                             {
                                 file.Article_ID = Convert.ToInt32(reader["Article_ID"]);
                                 file.FilePath = (string)reader["FilePath"];
-                                files.Add(file.FilePath.Replace("~", ""));
+                                files.Add(file.FilePath);
                             }
                         }
                     }
@@ -399,7 +403,7 @@ namespace DAL.Contexts
                         using (SqlCommand FileCommand = new SqlCommand(fileQuery, connection))
                         {
                             FileCommand.Parameters.Add(new SqlParameter("@Article_ID", ArticleID));
-                            FileCommand.Parameters.Add(new SqlParameter("@FilePath", "~"+File));
+                            FileCommand.Parameters.Add(new SqlParameter("@FilePath", File));
                             FileCommand.ExecuteScalar();
 
                             using (SqlDataReader reader = FileCommand.ExecuteReader())

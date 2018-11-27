@@ -57,7 +57,6 @@ namespace Football_Insider.Controllers
             EditedArticle._Article = articleViewModel.Article;
             logic.EditArticle(EditedArticle);
 
-
             Session["EditedArticle"] = EditedArticle;
             return RedirectToAction("EditFile", "File", new {es = EditedArticle});
         }
