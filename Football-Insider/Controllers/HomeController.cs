@@ -23,11 +23,15 @@ namespace Football_Insider.Controllers
                 articleViewModel.Articles = logic.GetAllArticles();
                 return View(articleViewModel);
             }
-            catch (Exception sqlException)
+            catch (SqlException sqlException)
             {
                 return View(sqlException.Message);
             }
-            
+            catch (InvalidCastException invalidCastException)
+            {
+                return View(invalidCastException);
+            }
+
         }
 
         public ActionResult About()

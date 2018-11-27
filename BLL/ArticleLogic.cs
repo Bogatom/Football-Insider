@@ -26,9 +26,14 @@ namespace Factory
             {
                 return _repo.GetAllArticles();
             }
-            catch (Exception sqlException)
+            catch (SqlException sqlException)
             {
                 Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
                 throw;
             }
         }

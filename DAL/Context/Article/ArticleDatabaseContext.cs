@@ -21,13 +21,14 @@ namespace DAL.Contexts
             string query = "SELECT * FROM [Article]";
             var model = new List<Article>();
 
-            try
+
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
+                    connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        connection.Open();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -44,21 +45,24 @@ namespace DAL.Contexts
 
                                 model.Add(article);
                                 model.ToList();
-                                articles = model;                              
+                                articles = model;
                             }
                         }
+
                         connection.Close();
                     }
+
+                    return articles;
+
                 }
-                return articles;
-            }
-            catch (SqlException sqlException)
-            {
-                throw sqlException;
-            }
-            catch (InvalidCastException invalidCastException)
-            {
-                throw invalidCastException;
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
             }
         }
 
