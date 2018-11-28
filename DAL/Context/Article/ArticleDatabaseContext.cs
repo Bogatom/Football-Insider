@@ -15,12 +15,10 @@ namespace DAL.Contexts
         private List<Article> articles = new List<Article>();
         private List<Category> categories = new List<Category>();
 
-
         public List<Article> GetAllArticles()
         {
             string query = "SELECT * FROM [Article]";
             var model = new List<Article>();
-
 
             using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
@@ -51,9 +49,7 @@ namespace DAL.Contexts
 
                         connection.Close();
                     }
-
                     return articles;
-
                 }
                 catch (SqlException sqlException)
                 {
@@ -72,24 +68,36 @@ namespace DAL.Contexts
             string categoryQuery = "SELECT * FROM Category WHERE Category_ID = @Category_ID";
             using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                connection.Open();
-                FileModel file = new FileModel();
-                using (SqlCommand CateogryCommand = new SqlCommand(categoryQuery, connection))
+                try
                 {
-                    CateogryCommand.Parameters.Add(new SqlParameter("@Category_ID", category_id));
-                    CateogryCommand.ExecuteScalar();
-
-                    using (SqlDataReader reader = CateogryCommand.ExecuteReader())
+                    connection.Open();
+                    FileModel file = new FileModel();
+                    using (SqlCommand CateogryCommand = new SqlCommand(categoryQuery, connection))
                     {
-                        while (reader.Read())
+                        CateogryCommand.Parameters.Add(new SqlParameter("@Category_ID", category_id));
+                        CateogryCommand.ExecuteScalar();
+
+                        using (SqlDataReader reader = CateogryCommand.ExecuteReader())
                         {
-                            category.CategoryId = Convert.ToInt32(reader["Category_ID"]);
-                            category.CategoryName = (string)reader["CategoryName"];
+                            while (reader.Read())
+                            {
+                                category.CategoryId = Convert.ToInt32(reader["Category_ID"]);
+                                category.CategoryName = (string)reader["CategoryName"];
+                            }
                         }
+                        connection.Close();
                     }
+                    return category.CategoryName;
+                }
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
                 }
             }
-            return category.CategoryName;
         }
 
         internal List<string> GetImageForArticle(int articleId)
@@ -103,25 +111,37 @@ namespace DAL.Contexts
             {
                 using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
                 {
-                    connection.Open();
-                    FileModel file = new FileModel();
-                    using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
+                    try
                     {
-                        AddImageForArticle.Parameters.Add(new SqlParameter("@Article_ID", articleId));
-                        AddImageForArticle.ExecuteScalar();
-
-                        using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
+                        connection.Open();
+                        FileModel file = new FileModel();
+                        using (SqlCommand AddImageForArticle = new SqlCommand(imageQuery, connection))
                         {
-                            while (reader.Read())
+                            AddImageForArticle.Parameters.Add(new SqlParameter("@Article_ID", articleId));
+                            AddImageForArticle.ExecuteScalar();
+
+                            using (SqlDataReader reader = AddImageForArticle.ExecuteReader())
                             {
-                                file.Article_ID = Convert.ToInt32(reader["Article_ID"]);
-                                file.FilePath = (string)reader["FilePath"];
-                                files.Add(file.FilePath);
+                                while (reader.Read())
+                                {
+                                    file.Article_ID = Convert.ToInt32(reader["Article_ID"]);
+                                    file.FilePath = (string)reader["FilePath"];
+                                    files.Add(file.FilePath);
+                                }
                             }
+                            connection.Close();
                         }
+                        return files;
+                    }
+                    catch (SqlException sqlException)
+                    {
+                        throw sqlException;
+                    }
+                    catch (InvalidCastException invalidCastException)
+                    {
+                        throw invalidCastException;
                     }
                 }
-                return files;
             }
             catch (SqlException sqlException)
             {
@@ -130,42 +150,46 @@ namespace DAL.Contexts
             
         }
 
-        public Article AddArticle(BindModel article)
+        public Article AddArticle(Article article)
         {
             string query = "Insert INTO Article (Title, Content, CreationDate) " + "Values (@Title, @Content, @CreationDate); SELECT SCOPE_IDENTITY()";
             Article NewArtile = new Article();
 
-            try
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
                     connection.Open();
                     using (SqlCommand AddArticleCommand = new SqlCommand(query, connection))
                     {
-                        AddArticleCommand.Parameters.Add(new SqlParameter("@Title", article._Article.Title));
-                        AddArticleCommand.Parameters.Add(new SqlParameter("@Content", article._Article.Content));
+                        AddArticleCommand.Parameters.Add(new SqlParameter("@Title", article.Title));
+                        AddArticleCommand.Parameters.Add(new SqlParameter("@Content", article.Content));
                         AddArticleCommand.Parameters.Add(new SqlParameter("@CreationDate", DateTime.Now));
-
                         NewArtile.ArticleId = Convert.ToInt32(AddArticleCommand.ExecuteScalar());
                     }
                     connection.Close();
                     return NewArtile;
                 }
-            }
-                               
-            catch (SqlException sqlException)
-            {
-                throw sqlException;
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
             }
         }
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
             FileModel NewFile = new FileModel();
-            try
+
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
+                    connection.Open();
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         Int32 rowsAffected;
@@ -175,66 +199,31 @@ namespace DAL.Contexts
                         cmd.Connection = connection;
                         cmd.Parameters.Add("@ArticleID", SqlDbType.Int).Value = ArticleId;
                         cmd.Parameters.Add("@FilePath", SqlDbType.VarChar).Value = Path;
-
-                        connection.Open();
-
                         rowsAffected = cmd.ExecuteNonQuery();
                     }
+                    connection.Close();
                     return NewFile;
                 }
-            }
-            catch (SqlException sqlException)
-            {
-                throw sqlException;
-            }
-        }
-
-        public List<Category> GetAllCategories()
-        {
-            string query = "SELECT * FROM [Category]";
-            var model = new List<Category>();
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                catch (SqlException sqlException)
                 {
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        connection.Open();
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var category = new Category
-                                {
-                                    CategoryId = Convert.ToInt32(reader["Category_ID"]),
-                                    CategoryName = reader["CategoryName"].ToString(),
-                                };
-
-                                model.Add(category);
-                                model.ToList();
-                                categories = model;
-                            }
-                        }
-                        connection.Close();
-                    }
+                    throw sqlException;
                 }
-                return categories;
-            }
-            catch (SqlException sqlException)
-            {
-                throw sqlException;
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
             }
         }
 
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
-            string CategoryQuery = "UPDATE Article SET Category_ID = (SELECT Category_ID FROM Category WHERE CategoryName = @CategoryName) WHERE Article_ID = @Article_ID; SELECT SCOPE_IDENTITY()";
+            string CategoryQuery =
+                "UPDATE Article SET Category_ID = (SELECT Category_ID FROM Category WHERE CategoryName = @CategoryName) WHERE Article_ID = @Article_ID; SELECT SCOPE_IDENTITY()";
             Category category = new Category();
 
-            try
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
                     connection.Open();
                     using (SqlCommand AddCategoryCommand = new SqlCommand(CategoryQuery, connection))
@@ -246,20 +235,26 @@ namespace DAL.Contexts
                     connection.Close();
                     return category;
                 }
-            }
-            catch (SqlException sqlException)
-            {
-                throw sqlException;
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+
+                catch (InvalidCastException invaldCastException)
+                {
+                    throw invaldCastException;
+                }
             }
         }
-
+    
         public Article GetCurrentArticle(int articleId)
         {
             string ArticleQuery = "SELECT * FROM Article WHERE Article_ID = @id; SELECT SCOPE_IDENTITY()";
             Article NewArticle = new Article();
-            try
+            
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
                     connection.Open();
                     using (SqlCommand GetArticleCommand = new SqlCommand(ArticleQuery, connection))
@@ -275,7 +270,7 @@ namespace DAL.Contexts
                                     Title = reader["Title"].ToString(),
                                     Content = reader["Content"].ToString(),
                                     Category = GetCategoryForArticle(Convert.ToInt32(reader["Category_ID"])),
-                                    CreationDate =  reader["CreationDate"].ToString(),
+                                    CreationDate = reader["CreationDate"].ToString(),
                                     Image = GetImageForArticle(Convert.ToInt32(reader["Article_ID"]))
                                 };
                                 NewArticle = article;
@@ -285,59 +280,59 @@ namespace DAL.Contexts
                     connection.Close();
                     return NewArticle;
                 }
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
+            }          
         }
 
-        public Article EditArticle(BindModel EditedArticle)
+        public Article EditArticle(Article EditedArticle)
         {
             string query = "UPDATE Article SET Title = @Title, Content = @Content, CreationDate = @CreationDate WHERE Article_ID = @Article_ID; SELECT SCOPE_IDENTITY()";
-            Article NewArticle = new Article();
 
-            try
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
                     connection.Open();
                     using (SqlCommand EditArticleCommand = new SqlCommand(query, connection))
                     {
-                        EditArticleCommand.Parameters.Add(new SqlParameter("@Article_ID", EditedArticle._Article.ArticleId));
-                        EditArticleCommand.Parameters.Add(new SqlParameter("@Title", EditedArticle._Article.Title));
-                        EditArticleCommand.Parameters.Add(new SqlParameter("@Content", EditedArticle._Article.Content));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Article_ID", EditedArticle.ArticleId));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Title", EditedArticle.Title));
+                        EditArticleCommand.Parameters.Add(new SqlParameter("@Content", EditedArticle.Content));
                         EditArticleCommand.Parameters.Add(new SqlParameter("@CreationDate", DateTime.Now));
                         EditArticleCommand.ExecuteScalar();
                     }
                     connection.Close();
 
-                    NewArticle.ArticleId  = EditedArticle._Article.ArticleId;
-                    NewArticle.Title = EditedArticle._Article.Title;
-                    NewArticle.Content = EditedArticle._Article.Content;
-                    NewArticle.Image = GetImageForArticle(EditedArticle._Article.ArticleId);
-                    NewArticle.CreationDate = DateTime.Now.ToString();
-
-                    EditedArticle._Article = NewArticle;
-                    return EditedArticle._Article;
+                    EditedArticle.Image = GetImageForArticle(EditedArticle.ArticleId);
+                    return EditedArticle;
                 }
-            }
-
-            catch (SqlException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
+            }          
         }     
 
         public Article DeleteArticle(int articleId)
         {
             Article article = new Article();
-            try
+
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
+                    connection.Open();
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         Int32 rowsAffected;
@@ -350,25 +345,30 @@ namespace DAL.Contexts
                         connection.Open();
 
                         rowsAffected = cmd.ExecuteNonQuery();
-                    }               
+                    }
+                    connection.Close();
+                    return article;
                 }
-                return article;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
+            }                  
         }
 
         public FileModel DeleteFile(int ArticleID, int FileID)
         {
             FileModel fileModel = new FileModel();
-            try
+          
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
             {
-                using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+                try
                 {
+                    connection.Open();
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         Int32 rowsAffected;
@@ -377,54 +377,61 @@ namespace DAL.Contexts
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Connection = connection;
                         cmd.Parameters.Add("@Article_ID", SqlDbType.Int).Value = ArticleID;
-                        cmd.Parameters.Add("@File_ID", SqlDbType.Int).Value = FileID;
-
-                        connection.Open();
+                        cmd.Parameters.Add("@File_ID", SqlDbType.Int).Value = FileID;                      
 
                         rowsAffected = cmd.ExecuteNonQuery();
                     }
+                    connection.Close();
+                    return fileModel;
                 }
 
-                return fileModel;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
             }
         }
 
         public FileModel GetCurrentFile(int ArticleID, string File)
         {
             FileModel fileModel = new FileModel();
-            try
-            {
-                    string fileQuery = "SELECT Files.[File_ID] FROM Files INNER JOIN Article_Files ON Files.[File_ID] = Article_Files.[File_ID] WHERE Article_Files.[Article_ID] = @Article_ID AND Files.[FilePath] = @FilePath";
-                    using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
-                    {
-                        connection.Open();
-                        FileModel file = new FileModel();
-                        using (SqlCommand FileCommand = new SqlCommand(fileQuery, connection))
-                        {
-                            FileCommand.Parameters.Add(new SqlParameter("@Article_ID", ArticleID));
-                            FileCommand.Parameters.Add(new SqlParameter("@FilePath", File));
-                            FileCommand.ExecuteScalar();
 
-                            using (SqlDataReader reader = FileCommand.ExecuteReader())
+            string fileQuery = "SELECT Files.[File_ID] FROM Files INNER JOIN Article_Files ON Files.[File_ID] = Article_Files.[File_ID] WHERE Article_Files.[Article_ID] = @Article_ID AND Files.[FilePath] = @FilePath";
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            {
+                try
+                {
+                    connection.Open();
+                    FileModel file = new FileModel();
+                    using (SqlCommand FileCommand = new SqlCommand(fileQuery, connection))
+                    {
+                        FileCommand.Parameters.Add(new SqlParameter("@Article_ID", ArticleID));
+                        FileCommand.Parameters.Add(new SqlParameter("@FilePath", File));
+                        FileCommand.ExecuteScalar();
+
+                        using (SqlDataReader reader = FileCommand.ExecuteReader())
+                        {
+                            while (reader.Read())
                             {
-                                while (reader.Read())
-                                {
-                                    fileModel.File_ID = Convert.ToInt32(reader["File_ID"]);
-                                }
+                                fileModel.File_ID = Convert.ToInt32(reader["File_ID"]);
                             }
                         }
-                        return fileModel;
+                    }
+                    connection.Close();
+                    return fileModel;
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
             }
         }
     }

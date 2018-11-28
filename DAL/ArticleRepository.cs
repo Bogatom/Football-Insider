@@ -27,7 +27,7 @@ namespace DAL
             return _context.GetAllCategories();
         }
 
-        public Article AddArticle(BindModel article)
+        public Article AddArticle(Article article)
         {
             return _context.AddArticle(article);
         }
@@ -47,7 +47,7 @@ namespace DAL
             return _context.GetCurrentArticle(articleId);
         }
 
-        public Article EditArticle(BindModel EditedArticle)
+        public Article EditArticle(Article EditedArticle)
         {
             return _context.EditArticle(EditedArticle);
         }

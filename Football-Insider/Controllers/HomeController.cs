@@ -25,27 +25,18 @@ namespace Football_Insider.Controllers
             }
             catch (SqlException sqlException)
             {
-                return View(sqlException.Message);
+                return View("Error", sqlException);
             }
             catch (InvalidCastException invalidCastException)
             {
-                return View(invalidCastException);
+                return View("Error", invalidCastException);
             }
-
         }
 
-        public ActionResult About()
+        public ActionResult Error(Exception ex)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            TempData["Error"] = ex;
+            return View(TempData["Error"]);
         }
     }
 }

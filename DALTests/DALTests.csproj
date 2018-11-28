@@ -69,27 +69,19 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Context\Article\ArticleDatabaseContextTests.cs" />
+    <Compile Include="Context\Article\ArticleMemoryContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{3964D795-E662-4B52-9DA3-32B5A5568179}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{26AB5F99-3159-4F9E-86C1-33A87AC46E1C}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Interfaces_BLL_DAL\Interfaces_BLL_DAL.csproj">
-      <Project>{f6f1a563-b1cc-42a7-ab38-9e466b11e331}</Project>
-      <Name>Interfaces_BLL_DAL</Name>
+    <ProjectReference Include="..\Factory\Factory.csproj">
+      <Project>{9df605fd-177c-4428-a648-2b4900274d90}</Project>
+      <Name>Factory</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces_UI_BLL\Interfaces_UI_BLL.csproj">
-      <Project>{369d1f91-eebd-48a9-8e6d-6f42e5eb5770}</Project>
+      <Project>{369D1F91-EEBD-48A9-8E6D-6F42E5EB5770}</Project>
       <Name>Interfaces_UI_BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\MDL\MDL.csproj">

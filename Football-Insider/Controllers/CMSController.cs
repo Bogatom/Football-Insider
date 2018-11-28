@@ -3,6 +3,7 @@ using Football_Insider.ViewModels;
 using Interfaces_UI_BLL;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,8 +18,20 @@ namespace Football_Insider.Controllers
         // GET: CMS
         public ActionResult Dashboard()
         {
-            articleViewModel.Articles = logic.GetAllArticles();
-            return View(articleViewModel);
+            try
+            {
+                articleViewModel.Articles = logic.GetAllArticles();
+                return View(articleViewModel);
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
+            
         }
     }
 }

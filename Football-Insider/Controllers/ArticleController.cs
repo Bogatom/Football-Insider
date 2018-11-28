@@ -8,6 +8,7 @@ using System.IO;
 using MDL;
 using Factory;
 using Interfaces_UI_BLL;
+using System.Data.SqlClient;
 
 namespace Football_Insider.Controllers
 {
@@ -15,12 +16,22 @@ namespace Football_Insider.Controllers
     {
         private IArticleLogic logic = LogicFactory.CreateArticleLogic();
         ArticleViewModel articleViewModel = new ArticleViewModel();
-        CategoryViewModel categoryViewModel = new CategoryViewModel();
 
         public ActionResult AllArticles()
         {
-            articleViewModel.Articles = logic.GetAllArticles();
-            return View(articleViewModel);
+            try
+            {
+                articleViewModel.Articles = logic.GetAllArticles();
+                return View(articleViewModel);
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
 
         public ActionResult AddArticle()
@@ -29,49 +40,101 @@ namespace Football_Insider.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddArticle([Bind()] BindModel article)
+        public ActionResult AddArticle([Bind()] Article article)
         {
-            BindModel NewArticle = new BindModel();
-
-            NewArticle._Article = logic.AddArticle(article);
-
-            if (NewArticle._Article.ArticleId != 0)
+            try
             {
-                Session["Article"] = NewArticle;
-                return RedirectToAction("AddFile", "File", new {es = NewArticle});
+                Article NewArticle = new Article();
+                NewArticle = logic.AddArticle(article);
+
+                if (NewArticle.ArticleId != 0)
+                {
+                    Session["Article"] = NewArticle;
+                    return RedirectToAction("AddFile", "File", new {es = NewArticle});
+                }
+                return View(article);
             }
-            return View(article);
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
 
         public ActionResult EditArticle(int articleId)
         {
-            articleViewModel.Article = logic.GetCurrentArticle(articleId);
-            return View(articleViewModel);
+            try
+            {
+                articleViewModel.Article = logic.GetCurrentArticle(articleId);
+                return View(articleViewModel);
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
-
-
+        
         [HttpPost]
         public ActionResult EditArticle(ArticleViewModel articleViewModel)
         {
-            BindModel EditedArticle = new BindModel();
-            EditedArticle._Article = articleViewModel.Article;
-            logic.EditArticle(EditedArticle);
+            try
+            {
+                Article EditedArticle = new Article();
+                EditedArticle = articleViewModel.Article;
+                logic.EditArticle(EditedArticle);
 
-            Session["EditedArticle"] = EditedArticle;
-            return RedirectToAction("EditFile", "File", new {es = EditedArticle});
+                Session["EditedArticle"] = EditedArticle;
+                return RedirectToAction("EditFile", "File", new { es = EditedArticle });
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
 
         public ActionResult ViewArticle(int articleId)
         {
-            articleViewModel.Article = logic.GetCurrentArticle(articleId);
-            return View(articleViewModel);
+            try
+            {
+                articleViewModel.Article = logic.GetCurrentArticle(articleId);
+                return View(articleViewModel);
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
 
         public ActionResult DeleteArticle(int articleId)
         {
-            logic.DeleteArticle(articleId);
-            return RedirectToAction("AllArticles", "Article");
+            try
+            {
+                logic.DeleteArticle(articleId);
+                return RedirectToAction("AllArticles", "Article");
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
-
     }
 }
