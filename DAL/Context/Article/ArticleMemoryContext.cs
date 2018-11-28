@@ -28,17 +28,6 @@ namespace DAL.Contexts
             return Articles;
         }
 
-        public List<Category> GetAllCategories()
-        {
-            Category category = new Category();
-            category.ArticleId = 1;
-            category.CategoryId = 1;
-            category.CategoryName = "Populair";
-            Categories.Add(category);
-
-            return Categories;
-        }
-
         public Article AddArticle(Article article)
         {
             Articles.Add(article);

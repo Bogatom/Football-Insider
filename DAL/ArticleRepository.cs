@@ -22,11 +22,6 @@ namespace DAL
             return _context.GetAllArticles();
         }
 
-        public List<Category> GetAllCategories()
-        {
-            return _context.GetAllCategories();
-        }
-
         public Article AddArticle(Article article)
         {
             return _context.AddArticle(article);

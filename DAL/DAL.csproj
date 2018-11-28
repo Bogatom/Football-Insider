@@ -56,9 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticleRepository.cs" />
+    <Compile Include="CategoryRepository.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Context\Article\ArticleDatabaseContext.cs" />
     <Compile Include="Context\Article\ArticleMemoryContext.cs" />
+    <Compile Include="Context\Category\CategoryDatabaseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

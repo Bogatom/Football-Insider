@@ -13,7 +13,7 @@ namespace Football_Insider.Controllers
 {
     public class CategoryController : Controller
     {
-        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        private ICategoryLogic logic = LogicFactory.CreateCategoryLogic();
         CategoryViewModel cateogryViewModel = new CategoryViewModel();
 
         public ActionResult AddCategory(int id)

@@ -11,7 +11,6 @@ namespace Interfaces_UI_BLL
     public interface IArticleLogic
     {
         List<Article> GetAllArticles();
-        List<Category> GetAllCategories();
         Article AddArticle(Article article);
         Category AddCategoryToArticle(int id, string CategoryName);
         FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);

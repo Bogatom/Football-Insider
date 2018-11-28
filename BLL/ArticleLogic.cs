@@ -38,24 +38,6 @@ namespace Factory
             }
         }
 
-        public List<Category> GetAllCategories()
-        {
-            try
-            {
-                return _repo.GetAllCategories();
-            }
-            catch (SqlException sqlException)
-            {
-                Console.WriteLine(sqlException);
-                throw;
-            }
-            catch (InvalidCastException invalidCastException)
-            {
-                Console.WriteLine(invalidCastException);
-                throw;
-            }
-        }
-
         public Article AddArticle(Article article)
         {
             try

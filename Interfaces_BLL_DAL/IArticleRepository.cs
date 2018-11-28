@@ -12,7 +12,6 @@ namespace Interfaces_UI_BLL
     public interface IArticleRepository
     {
         List<Article> GetAllArticles();
-        List<Category> GetAllCategories();
         Article AddArticle(Article article);
         FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
         Category AddCategoryToArticle(int id, string CategoryName);
