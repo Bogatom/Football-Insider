@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="IArticleContext.cs" />
     <Compile Include="IArticleRepository.cs" />
+    <Compile Include="ICategoryContext.cs" />
+    <Compile Include="ICategoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

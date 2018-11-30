@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
-using DAL.Contexts;
-using Interfaces_UI_BLL;
+using DAL.Context;
+using Interfaces_BLL_DAL;
 using MDL;
 
 namespace DAL
@@ -22,12 +22,7 @@ namespace DAL
             return _context.GetAllArticles();
         }
 
-        public List<Category> GetAllCategories()
-        {
-            return _context.GetAllCategories();
-        }
-
-        public Article AddArticle(BindModel article)
+        public Article AddArticle(Article article)
         {
             return _context.AddArticle(article);
         }
@@ -47,7 +42,7 @@ namespace DAL
             return _context.GetCurrentArticle(articleId);
         }
 
-        public Article EditArticle(BindModel EditedArticle)
+        public Article EditArticle(Article EditedArticle)
         {
             return _context.EditArticle(EditedArticle);
         }

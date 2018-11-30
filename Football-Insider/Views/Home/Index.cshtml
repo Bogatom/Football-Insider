@@ -4,33 +4,44 @@
     ViewBag.Title = "Homepage van Football Insider";
 }
 
-<div class="row">
-    @foreach (MDL.Article article in Model.Articles)
-    {
-        <div class="col-sm-6 col-md-4 article">
-            <a href="@Url.Action("ViewArticle", "Article", new {articleId = article.ArticleId})">
-                <div class="thumbnail">
-                    @if (article.Image.Count() == 0)
-                    {
-                        <img src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" class="item-image">
-                    }
-                    else
-                    {
-                        <img src="@article.Image.First()" class="item-image">
-                        <div class="text-block">
-                            <h3 class="home-item-title">@article.Title</h3>
+@if (Model.Articles.Count >= 0)
+{
+    <div class="row">
+        @foreach (MDL.Article article in Model.Articles)
+        {
+            <div class="col-sm-6 col-md-4 article">
+                <a href="@Url.Action("ViewArticle", "Article", new {articleId = article.ArticleId})">
+                    <div class="thumbnail">
+                        @if (article.Image.Count() == 0)
+                        {
+                            <img src="https://i5.walmartimages.com/asr/f752abb3-1b49-4f99-b68a-7c4d77b45b40_1.39d6c524f6033c7c58bd073db1b99786.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF" class="item-image">
+                        }
+                        else
+                        {
+                            <img src="@article.Image.First()" class="item-image">
+                            <div class="text-block">
+                                <h3 class="home-item-title">@article.Title</h3>
+                            </div>
+                        }
+                        <div class="caption">
+                            <p>
+                                <span class="fa fa-clock-o" aria-hidden="true"></span> @article.CreationDate
+                                <br />
+                                <h3 class="home-item-category">@article.Category</h3>
+                            </p>
                         </div>
-                    }
-
-                    <div class="caption">
-                        <p>
-                            <span class="fa fa-clock-o" aria-hidden="true"></span> @article.CreationDate
-                            <br />
-                            <h3 class="home-item-category">@article.Category</h3>
-                        </p>
                     </div>
-                </div>
-            </a>
-        </div>
-    }
-</div>
+                </a>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="error">
+        <div class="error-code m-b-10 m-t-20">Oeps... <i class="fa fa-warning"></i></div>
+        <h3 class="font-bold">Er zijn helaas geen artikelen, onze excuses voor het ongemak.</h3>
+    </div>
+}
+
+

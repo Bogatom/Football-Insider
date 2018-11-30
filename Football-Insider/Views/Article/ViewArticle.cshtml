@@ -14,19 +14,31 @@
     }
 </style>
 
-<h2 class="ArticleTitle">@Model.Article.Title</h2>
 <span class="fa fa-clock-o" aria-hidden="true" style="font-size:1.171875rem"></span>
 <h5 class="creationDateArticle">@Model.Article.CreationDate</h5>
 <h5 class="categoryArticle"> @Model.Article.Category</h5>
-<div class="w3-content w3-display-container" style="max-width: 100%;">
+<div class="w3-content w3-display-container">
 
     @foreach (var picture in @Model.Article.Image)
     {
-        <img class="mySlides" src="@picture" style="width:100%">
+        <img class="mySlides" src="@picture">
     }
-    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    @if (Model.Article.Image.Count <= 1)
+    {
+
+    }
+    else
+    {
+        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+    }
+
 </div>
+
+<div class="text-block-single-article">
+    <h3 class="home-item-title-single">@Model.Article.Title</h3>
+</div>
+
 <p class="article-content">@Model.Article.Content</p>
 
 <script>

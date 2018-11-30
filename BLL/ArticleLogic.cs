@@ -1,4 +1,4 @@
-﻿using DAL;
+﻿using Interfaces_BLL_DAL;
 using Interfaces_UI_BLL;
 using MDL;
 using System;
@@ -38,49 +38,148 @@ namespace Factory
             }
         }
 
-        public List<Category> GetAllCategories()
+        public Article AddArticle(Article article)
         {
-            return _repo.GetAllCategories();
-        }
-
-        public Article AddArticle(BindModel article)
-        {
-            return _repo.AddArticle(article);
+            try
+            {
+                return _repo.AddArticle(article);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
-            return _repo.AddFile(file, ArticleId, Path);
+            try
+            {
+                return _repo.AddFile(file, ArticleId, Path);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
-            return _repo.AddCategoryToArticle(id, CategoryName);
+            try
+            {
+                return _repo.AddCategoryToArticle(id, CategoryName);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public Article GetCurrentArticle(int articleId)
         {
-            return _repo.GetCurrentArticle(articleId);
+            try
+            {
+                return _repo.GetCurrentArticle(articleId);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
-        public Article EditArticle(BindModel EditedArticle)
+        public Article EditArticle(Article EditedArticle)
         {
-            return _repo.EditArticle(EditedArticle);
+            try
+            {
+                return _repo.EditArticle(EditedArticle);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public Article DeleteArticle(int articleId)
         {
-            return _repo.DeleteArticle(articleId);
+            try
+            {
+                return _repo.DeleteArticle(articleId);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public FileModel DeleteFile(int ArticleID, int FileID)
         {
-            return _repo.DeleteFile(ArticleID, FileID);
+            try
+            {
+                return _repo.DeleteFile(ArticleID, FileID);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
 
         public FileModel GetCurrentFile(int ArticleID, string File)
         {
-            return _repo.GetCurrentFile(ArticleID, File);
+            try
+            {
+                return _repo.GetCurrentFile(ArticleID, File);
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
         }
     }
 }

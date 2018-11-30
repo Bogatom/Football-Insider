@@ -56,7 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindModel.cs" />
+    <Compile Include="Article.cs" />
+    <Compile Include="Category.cs" />
     <Compile Include="FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

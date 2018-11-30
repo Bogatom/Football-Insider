@@ -11,12 +11,11 @@ namespace Interfaces_UI_BLL
     public interface IArticleLogic
     {
         List<Article> GetAllArticles();
-        List<Category> GetAllCategories();
-        Article AddArticle(BindModel article);
+        Article AddArticle(Article article);
         Category AddCategoryToArticle(int id, string CategoryName);
         FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);
         Article GetCurrentArticle(int articleId);
-        Article EditArticle(BindModel EditedArticle);
+        Article EditArticle(Article EditedArticle);
         Article DeleteArticle(int articleId);
         FileModel DeleteFile(int ArticleID, int FileID);
         FileModel GetCurrentFile(int ArticleID, string File);

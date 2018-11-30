@@ -5,26 +5,35 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web;
-using Moq;
+using Interfaces_BLL_DAL;
 
-namespace DAL.Contexts
+namespace DAL.Context
 {
     public class ArticleMemoryContext : IArticleContext
     {
-       
+        List<Article> Articles = new List<Article>();
+        List<Category> Categories = new List<Category>();
+
         public List<Article> GetAllArticles()
         {
-            throw new NotImplementedException();
+
+            Article article = new Article
+            {
+                ArticleId = 1,
+                Title = "Artikel 1",
+                Category = "Opmerkelijk",
+                Content = "Lorem Ipsum",
+                CreationDate = DateTime.Now.ToShortDateString()
+            };
+            Articles.Add(article);
+
+            return Articles;
         }
 
-        public List<Category> GetAllCategories()
+        public Article AddArticle(Article article)
         {
-            throw new NotImplementedException();
-        }
-
-        public Article AddArticle(BindModel article)
-        {
-            throw new NotImplementedException();
+            Articles.Add(article);
+            return article;
         }
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
@@ -32,19 +41,31 @@ namespace DAL.Contexts
             throw new NotImplementedException();
         }
 
-        public Category AddCategoryToArticle(int id, string CategoryName)
+        public Category AddCategoryToArticle(int id, string name)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                ArticleId = 2,
+                CategoryId = 2
+            };
+            Categories.Add(category);
+
+            return category;
         }
 
         public Article GetCurrentArticle(int articleId)
         {
-            throw new NotImplementedException();
+            Article newArticle = new Article
+            {
+                ArticleId = articleId
+            };
+            return newArticle;
         }
 
-        public Article EditArticle(BindModel EditedArticle)
+        public Article EditArticle(Article EditedArticle)
         {
-            throw new NotImplementedException();
+            EditedArticle.Content = "Bla Bla Bla";
+            return EditedArticle;
         }
 
         public FileModel DeleteFile(int articleId, string image)
