@@ -60,7 +60,7 @@ namespace DAL.Contexts.Tests
             List<Category> AllCategories = logic.GetAllCategories();
 
             //Act
-            int expected = 1
+            int expected = 5;
 ;
             int actual = AllCategories.Count();
 

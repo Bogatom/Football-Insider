@@ -26,12 +26,7 @@ namespace DAL
         {
             return _context.AddArticle(article);
         }
-
-        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
-        {
-            return _context.AddFile(file, ArticleId, Path);
-        }
-
+       
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
             return _context.AddCategoryToArticle(id, CategoryName);
@@ -51,16 +46,5 @@ namespace DAL
         {
             return _context.DeleteArticle(articleId);
         }
-
-        public FileModel DeleteFile(int ArticleID, int FileID)
-        {
-            return _context.DeleteFile(ArticleID, FileID);
-        }
-
-        public FileModel GetCurrentFile(int ArticleID, string File)
-        {
-            return _context.GetCurrentFile(ArticleID, File);
-        }
-
     }
 }

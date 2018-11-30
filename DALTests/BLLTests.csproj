@@ -69,7 +69,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Context\Article\ArticleMemoryContextTests.cs" />
+    <Compile Include="Context\Article\ArticeLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

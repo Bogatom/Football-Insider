@@ -13,7 +13,7 @@ namespace Football_Insider.Controllers
 {
     public class FileController : Controller
     {
-        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        private IFileLogic logic = LogicFactory.CreateFileLogic();
 
 
         public ActionResult AddFile()

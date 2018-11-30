@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArticleLogic.cs" />
     <Compile Include="CategoryLogic.cs" />
+    <Compile Include="FileLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

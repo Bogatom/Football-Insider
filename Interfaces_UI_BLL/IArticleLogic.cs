@@ -13,11 +13,8 @@ namespace Interfaces_UI_BLL
         List<Article> GetAllArticles();
         Article AddArticle(Article article);
         Category AddCategoryToArticle(int id, string CategoryName);
-        FileModel AddFile(HttpPostedFileBase fileModel, int ArticleId, string Path);
         Article GetCurrentArticle(int articleId);
         Article EditArticle(Article EditedArticle);
         Article DeleteArticle(int articleId);
-        FileModel DeleteFile(int ArticleID, int FileID);
-        FileModel GetCurrentFile(int ArticleID, string File);
     }
 }

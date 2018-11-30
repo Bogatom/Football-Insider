@@ -56,24 +56,6 @@ namespace Factory
             }
         }
 
-        public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
-        {
-            try
-            {
-                return _repo.AddFile(file, ArticleId, Path);
-            }
-            catch (SqlException sqlException)
-            {
-                Console.WriteLine(sqlException);
-                throw;
-            }
-            catch (InvalidCastException invalidCastException)
-            {
-                Console.WriteLine(invalidCastException);
-                throw;
-            }
-        }
-
         public Category AddCategoryToArticle(int id, string CategoryName)
         {
             try
@@ -133,42 +115,6 @@ namespace Factory
             try
             {
                 return _repo.DeleteArticle(articleId);
-            }
-            catch (SqlException sqlException)
-            {
-                Console.WriteLine(sqlException);
-                throw;
-            }
-            catch (InvalidCastException invalidCastException)
-            {
-                Console.WriteLine(invalidCastException);
-                throw;
-            }
-        }
-
-        public FileModel DeleteFile(int ArticleID, int FileID)
-        {
-            try
-            {
-                return _repo.DeleteFile(ArticleID, FileID);
-            }
-            catch (SqlException sqlException)
-            {
-                Console.WriteLine(sqlException);
-                throw;
-            }
-            catch (InvalidCastException invalidCastException)
-            {
-                Console.WriteLine(invalidCastException);
-                throw;
-            }
-        }
-
-        public FileModel GetCurrentFile(int ArticleID, string File)
-        {
-            try
-            {
-                return _repo.GetCurrentFile(ArticleID, File);
             }
             catch (SqlException sqlException)
             {

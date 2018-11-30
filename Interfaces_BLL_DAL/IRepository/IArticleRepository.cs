@@ -13,12 +13,9 @@ namespace Interfaces_BLL_DAL
     {
         List<Article> GetAllArticles();
         Article AddArticle(Article article);
-        FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
         Category AddCategoryToArticle(int id, string CategoryName);
         Article GetCurrentArticle(int articleId);
         Article EditArticle(Article EditedArticle);
-        Article DeleteArticle(int articleId);
-        FileModel DeleteFile(int ArticleID, int FileID);
-        FileModel GetCurrentFile(int ArticleID, string File);
+        Article DeleteArticle(int articleId);       
     }
 }
