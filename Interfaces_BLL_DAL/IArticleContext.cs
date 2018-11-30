@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace DAL.Contexts
+namespace Interfaces_BLL_DAL
 {
     public interface IArticleContext
     {

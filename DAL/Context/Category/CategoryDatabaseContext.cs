@@ -7,10 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using MDL;
 
-namespace DAL.Context.Category
+namespace DAL.Context
 {
     public class CategoryDatabaseContext : ICategoryContext
     {
+        Connection database = new Connection();
+        private List<Category> categories = new List<Category>();
+
         public List<Category> GetAllCategories()
         {
             string query = "SELECT * FROM [Category]";

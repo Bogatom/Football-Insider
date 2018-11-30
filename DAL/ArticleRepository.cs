@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
-using DAL.Contexts;
-using Interfaces_UI_BLL;
+using DAL.Context;
+using Interfaces_BLL_DAL;
 using MDL;
 
 namespace DAL

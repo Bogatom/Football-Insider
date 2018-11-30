@@ -13,14 +13,15 @@ namespace Football_Insider.Controllers
 {
     public class CategoryController : Controller
     {
-        private ICategoryLogic logic = LogicFactory.CreateCategoryLogic();
+        private ICategoryLogic Clogic = LogicFactory.CreateCategoryLogic();
+        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
         CategoryViewModel cateogryViewModel = new CategoryViewModel();
 
         public ActionResult AddCategory(int id)
         {
             try
             {
-                cateogryViewModel.Categories = logic.GetAllCategories();
+                cateogryViewModel.Categories = Clogic.GetAllCategories();
                 Session["ArticleId"] = id;
                 return View(cateogryViewModel);
             }
@@ -57,7 +58,7 @@ namespace Football_Insider.Controllers
         {
             try
             {
-                cateogryViewModel.Categories = logic.GetAllCategories();
+                cateogryViewModel.Categories = Clogic.GetAllCategories();
                 Session["ArticleId"] = id;
                 return View(cateogryViewModel);
             }

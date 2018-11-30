@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using MDL;
 
-namespace Interfaces_UI_BLL
+namespace Interfaces_BLL_DAL
 {
     public interface IArticleRepository
     {

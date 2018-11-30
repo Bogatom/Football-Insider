@@ -5,9 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Web;
-using Moq;
+using Interfaces_BLL_DAL;
 
-namespace DAL.Contexts
+namespace DAL.Context
 {
     public class ArticleMemoryContext : IArticleContext
     {
@@ -17,12 +17,14 @@ namespace DAL.Contexts
         public List<Article> GetAllArticles()
         {
 
-            Article article = new Article();
-            article.ArticleId = 1;
-            article.Title = "Artikel 1";
-            article.Category = "Opmerkelijk";
-            article.Content = "Lorem Ipsum";
-            article.CreationDate = DateTime.Now.ToShortDateString();          
+            Article article = new Article
+            {
+                ArticleId = 1,
+                Title = "Artikel 1",
+                Category = "Opmerkelijk",
+                Content = "Lorem Ipsum",
+                CreationDate = DateTime.Now.ToShortDateString()
+            };
             Articles.Add(article);
 
             return Articles;
@@ -41,18 +43,22 @@ namespace DAL.Contexts
 
         public Category AddCategoryToArticle(int id, string name)
         {
-            Category category = new Category();
-            category.ArticleId = 2;
-            category.CategoryId = 2;
+            Category category = new Category
+            {
+                ArticleId = 2,
+                CategoryId = 2
+            };
             Categories.Add(category);
 
             return category;
         }
 
         public Article GetCurrentArticle(int articleId)
-        {          
-            Article newArticle = new Article();
-            newArticle.ArticleId = articleId;
+        {
+            Article newArticle = new Article
+            {
+                ArticleId = articleId
+            };
             return newArticle;
         }
 

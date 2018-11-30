@@ -6,14 +6,14 @@ using System.Data.SqlClient;
 using System.Linq;
 using MDL;
 using System.Web;
+using Interfaces_BLL_DAL;
 
-namespace DAL.Contexts
+namespace DAL.Context
 {
     public class ArticleDatabaseContext : IArticleContext
     {
         Connection database = new Connection();
         private List<Article> articles = new List<Article>();
-        private List<Category> categories = new List<Category>();
 
         public List<Article> GetAllArticles()
         {

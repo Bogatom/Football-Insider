@@ -35,12 +35,14 @@ namespace DAL.Contexts.Tests
             //Arrange
             IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
             Article article = new Article();
-            article = new Article();
-            article.ArticleId = 2;
-            article.Title = "Artikel 2";
-            article.Category = "Populair";
-            article.Content = "Ipsum Lorem";
-            article.CreationDate = DateTime.Now.ToShortDateString();
+            article = new Article
+            {
+                ArticleId = 2,
+                Title = "Artikel 2",
+                Category = "Populair",
+                Content = "Ipsum Lorem",
+                CreationDate = DateTime.Now.ToShortDateString()
+            };
             logic.AddArticle(article);
 
             //Act
@@ -55,7 +57,7 @@ namespace DAL.Contexts.Tests
         public void GetAllCategories()
         {
             //Arrange
-            IArticleLogic logic = LogicFactory.CreateCategoryLogic();
+            ICategoryLogic logic = LogicFactory.CreateCategoryLogic();
             List<Category> AllCategories = logic.GetAllCategories();
 
             //Act
@@ -108,9 +110,11 @@ namespace DAL.Contexts.Tests
             //Arrange
             IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
 
-            Article article = new Article();
-            article.ArticleId = 1;
-            article.Content = "TESTEN";
+            Article article = new Article
+            {
+                ArticleId = 1,
+                Content = "TESTEN"
+            };
 
             logic.EditArticle(article);
 
