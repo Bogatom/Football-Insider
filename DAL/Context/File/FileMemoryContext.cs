@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MDL;
 using System.Web;
 using Interfaces_BLL_DAL;
-using System.Data.SqlClient;
-using System.Data;
+using MDL;
 
-namespace DAL.Context.File
+namespace DAL.Context
 {
-    public class FileDatabaseContext : IFileContext
+    public class FileMemoryContext : IFileContext
     {
-        Connection database = new Connection();
+        LocalConnection LocalDatabase = new LocalConnection();
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
             FileModel NewFile = new FileModel();
 
-            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(LocalDatabase.GetConnectionString()))
             {
                 try
                 {
@@ -48,11 +48,12 @@ namespace DAL.Context.File
                 }
             }
         }
+
         public FileModel DeleteFile(int ArticleID, int FileID)
         {
             FileModel fileModel = new FileModel();
 
-            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(LocalDatabase.GetConnectionString()))
             {
                 try
                 {
@@ -83,12 +84,13 @@ namespace DAL.Context.File
                 }
             }
         }
+
         public FileModel GetCurrentFile(int ArticleID, string File)
         {
             FileModel fileModel = new FileModel();
 
             string fileQuery = "SELECT Files.[File_ID] FROM Files INNER JOIN Article_Files ON Files.[File_ID] = Article_Files.[File_ID] WHERE Article_Files.[Article_ID] = @Article_ID AND Files.[FilePath] = @FilePath";
-            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            using (SqlConnection connection = new SqlConnection(LocalDatabase.GetConnectionString()))
             {
                 try
                 {

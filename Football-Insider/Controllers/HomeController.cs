@@ -13,7 +13,7 @@ namespace Football_Insider.Controllers
 {
     public class HomeController : Controller
     {
-        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        private IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
         ArticleViewModel articleViewModel = new ArticleViewModel();
 
         public ActionResult Index()

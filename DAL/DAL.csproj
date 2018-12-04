@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\Category\CategoryMemoryContext.cs" />
+    <Compile Include="Context\File\FileMemoryContext.cs" />
+    <Compile Include="LocalConnection.cs" />
     <Compile Include="Repository\ArticleRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Connection.cs" />

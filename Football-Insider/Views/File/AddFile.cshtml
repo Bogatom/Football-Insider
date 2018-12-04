@@ -6,7 +6,7 @@
 }
 
 @{
-    var article = (BindModel)Session["Article"];
+    var article = (Article)Session["Article"];
 }
 
 @using (Html.BeginForm("AddFile", "File", FormMethod.Post, new { enctype = "multipart/form-data" }))  
@@ -15,7 +15,7 @@
   
     <div class="form-horizontal">  
         <hr />  
-        @Html.Hidden("ArticleId", article._Article.ArticleId)
+        @Html.Hidden("ArticleId", article.ArticleId)
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })  
         <div class="form-group">  
             @Html.LabelFor(model => model.Files, htmlAttributes: new { @class = "control-label col-md-2" })  

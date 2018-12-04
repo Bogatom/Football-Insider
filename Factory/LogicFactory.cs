@@ -28,9 +28,19 @@ namespace Factory
             return new CategoryLogic(new CategoryRepository(new CategoryDatabaseContext()));
         }
 
+        public static ICategoryLogic CreateCategoryMemoryLogic()
+        {
+            return new CategoryLogic(new CategoryRepository(new CategoryMemoryContext()));
+        }
+
         public static IFileLogic CreateFileLogic()
         {
             return new FileLogic(new FileRepository(new FileDatabaseContext()));
+        }
+
+        public static IFileLogic CreateFileMemoryLogic()
+        {
+            return new FileLogic(new FileRepository(new FileMemoryContext()));
         }
     }
 }

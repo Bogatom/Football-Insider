@@ -14,7 +14,8 @@ namespace Football_Insider.Controllers
 {
     public class ArticleController : Controller
     {
-        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
+        private IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
         ArticleViewModel articleViewModel = new ArticleViewModel();
 
         public ActionResult AllArticles()

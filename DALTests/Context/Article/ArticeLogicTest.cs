@@ -14,18 +14,70 @@ namespace DAL.Contexts.Tests
     public class ArticleMemoryContextTests
     {
         [TestMethod()]
-        public void GetAllArticlesTest()
+        public void GetAllArticles()
         {
             //Arrange
             IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
             List<Article> AllArticles = logic.GetAllArticles();
 
             //Act
-            int expected = 1;
+            int expected = 2;
             int actual = AllArticles.Count();
 
             //Assert
             Assert.AreEqual(expected, actual);
+        }       
+
+        [TestMethod()]
+        public void GetAllCategories()
+        {
+            //Arrange
+            ICategoryLogic logic = LogicFactory.CreateCategoryMemoryLogic();
+            List<Category> AllCategories = logic.GetAllCategories();
+
+            //Act
+            int expected = 5;
+            int actual = AllCategories.Count();
+
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }       
+
+        [TestMethod()]
+        public void GetCurrentArticle()
+        {
+            //Arrange
+            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
+            Article article = logic.GetCurrentArticle(3);
+
+            //Act
+            int expected = 3;
+            int actual = article.ArticleId;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+
+        }
+     
+
+        [TestMethod()]
+        public void EditArticle()
+        {
+            //Arrange
+            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
+            Article article = logic.GetCurrentArticle(3);
+            Article editedArticle = logic.GetCurrentArticle(2);
+            article = logic.EditArticle(editedArticle);
+
+            //Act
+            Article expected = editedArticle;
+            Article actual = article;
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+
         }
 
         [TestMethod()]
@@ -33,96 +85,11 @@ namespace DAL.Contexts.Tests
         {
             //Arrange
             IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
-            Article article = new Article();
-            article = new Article
-            {
-                ArticleId = 2,
-                Title = "Artikel 2",
-                Category = "Populair",
-                Content = "Ipsum Lorem",
-                CreationDate = DateTime.Now.ToShortDateString()
-            };
-            logic.AddArticle(article);
 
             //Act
-            int expected = 2;
-            int actual = logic.GetAllArticles().Count;
 
             //Assert
-            Assert.AreEqual(expected, actual);
-        }
 
-        [TestMethod()]
-        public void GetAllCategories()
-        {
-            //Arrange
-            ICategoryLogic logic = LogicFactory.CreateCategoryLogic();
-            List<Category> AllCategories = logic.GetAllCategories();
-
-            //Act
-            int expected = 5;
-;
-            int actual = AllCategories.Count();
-
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void AddCategoryToArticle()
-        {
-            //Arrang
-            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
-
-
-            Article article = new Article();
-            article = logic.GetCurrentArticle(1);
-
-            //Act
-            string expected = article.Category = "Trending";
-            string actual = article.Category = "Opmerkelijk";
-
-            //Assert
-            Assert.AreNotEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void GetCurrentArticle()
-        {
-            //Arrange
-            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
-            
-            Article article = new Article();
-            article = logic.GetCurrentArticle(1);           
-
-            //Act
-            int expected = 1;
-            int actual = article.ArticleId;
-
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod()]
-        public void EditArticle()
-        {
-            //Arrange
-            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
-
-            Article article = new Article
-            {
-                ArticleId = 1,
-                Content = "TESTEN"
-            };
-
-            logic.EditArticle(article);
-
-            //Act
-            string actual = article.Content;
-            string expected = "Bla Bla Bla";
-
-            //Assert
-            Assert.AreEqual(expected, actual);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Football_Insider.Controllers
 {
     public class FileController : Controller
     {
-        private IFileLogic logic = LogicFactory.CreateFileLogic();
-
+        //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
+        private IFileLogic Flogic = LogicFactory.CreateFileMemoryLogic();
 
         public ActionResult AddFile()
         {
@@ -38,7 +38,7 @@ namespace Football_Insider.Controllers
                             //Save file to server folder  
                             file.SaveAs(ServerSavePath);
                             ServerSavePath = "/UploadedFiles/" + InputFileName;
-                            logic.AddFile(file, ArticleId, ServerSavePath);
+                            Flogic.AddFile(file, ArticleId, ServerSavePath);
                             ViewBag.UploadStatus = Files.Count().ToString() + " files uploaded successfully.";
                         }
 
@@ -65,8 +65,8 @@ namespace Football_Insider.Controllers
         {
             try
             {
-                FileModel fileModel = logic.GetCurrentFile(ArticleID, File);
-                logic.DeleteFile(ArticleID, fileModel.File_ID);
+                FileModel fileModel = Flogic.GetCurrentFile(ArticleID, File);
+                Flogic.DeleteFile(ArticleID, fileModel.File_ID);
                 return RedirectToAction("EditFile", "File");
             }
             catch (SqlException sqlException)

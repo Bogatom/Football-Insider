@@ -9,22 +9,10 @@ namespace DAL
 {
     internal class LocalConnection
     {
-        SqlConnection myConnection = new SqlConnection();
-        SqlConnectionStringBuilder myBuilder = new SqlConnectionStringBuilder();
-
-        public LocalConnection()
-        {
-            myBuilder.UserID = "";
-            myBuilder.Password = "";
-            myBuilder.InitialCatalog = "Football_Insider";
-            myBuilder.DataSource = @"DESKTOP - 9DG53HK\TOMSQL";
-            myBuilder.PersistSecurityInfo = true;
-            myConnection.ConnectionString = myBuilder.ConnectionString;
-        }
-
         public string GetConnectionString()
         {
-            string result = myBuilder.ConnectionString;
+            string result =
+                @"Data Source=DESKTOP-9DG53HK\TOMSQL;Initial Catalog=Football_Insider;Integrated Security=True;";
             return result;
         }
     }
