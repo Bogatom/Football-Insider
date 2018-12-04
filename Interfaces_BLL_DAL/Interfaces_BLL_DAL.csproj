@@ -42,12 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IArticleContext.cs" />
-    <Compile Include="IArticleRepository.cs" />
-    <Compile Include="ICategoryContext.cs" />
-    <Compile Include="ICategoryRepository.cs" />
-    <Compile Include="IFileContext.cs" />
-    <Compile Include="IFileRepository.cs" />
+    <Compile Include="IContext\IArticleContext.cs" />
+    <Compile Include="IRepository\IArticleRepository.cs" />
+    <Compile Include="IContext\ICategoryContext.cs" />
+    <Compile Include="IRepository\ICategoryRepository.cs" />
+    <Compile Include="IContext\IFileContext.cs" />
+    <Compile Include="IRepository\IFileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

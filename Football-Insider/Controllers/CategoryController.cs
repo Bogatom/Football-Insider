@@ -14,7 +14,7 @@ namespace Football_Insider.Controllers
     public class CategoryController : Controller
     {
         private ICategoryLogic Clogic = LogicFactory.CreateCategoryLogic();
-        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        private IArticleLogic Alogic = LogicFactory.CreateArticleLogic();
         CategoryViewModel cateogryViewModel = new CategoryViewModel();
 
         public ActionResult AddCategory(int id)
@@ -41,7 +41,7 @@ namespace Football_Insider.Controllers
             try
             {
                 Category newCategory = new Category();
-                newCategory = logic.AddCategoryToArticle(id, CategoryName);
+                newCategory = Alogic.AddCategoryToArticle(id, CategoryName);
                 return RedirectToAction("Dashboard", "CMS");
             }
             catch (SqlException sqlException)
@@ -77,7 +77,7 @@ namespace Football_Insider.Controllers
             try
             {
                 Category newCategory = new Category();
-                newCategory = logic.AddCategoryToArticle(id, CategoryName);
+                newCategory = Alogic.AddCategoryToArticle(id, CategoryName);
                 return RedirectToAction("AllArticles", "Article");
             }
             catch (SqlException sqlException)
