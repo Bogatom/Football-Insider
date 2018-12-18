@@ -1,0 +1,51 @@
+﻿@model  Football_Insider.ViewModels.HistoryViewModel
+
+
+@{
+    ViewBag.Title = "Geschiedenis";
+}
+
+
+
+<section id="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="active"><h1 class="Title-Dashboard">Geschiedenis</h1></li>
+        </ol>
+    </div>
+</section>
+
+<section id="TableSection">
+    <div class="container">
+        <input class="form-control" id="myInput" type="text" placeholder="Zoeken..">
+        <br />
+        <div id="table" class="table">
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+                <tr>
+                    <th class="text-center">Soort</th>
+                    <th class="text-center">Datum</th>
+                </tr>
+                <tbody id="myTable">
+                    @foreach (MDL.History history in Model.Histories)
+                    {
+                        <tr>
+                            <td class="pt-3-half">@history.Type</td>
+                            <td class="pt-3-half">@history.Date</td>                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

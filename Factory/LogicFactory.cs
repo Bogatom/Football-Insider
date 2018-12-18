@@ -8,6 +8,7 @@ using BLL;
 using DAL.Context;
 using DAL;
 using DAL.Context.File;
+using Interfaces_BLL_DAL;
 
 namespace Factory
 {
@@ -41,6 +42,11 @@ namespace Factory
         public static IFileLogic CreateFileMemoryLogic()
         {
             return new FileLogic(new FileRepository(new FileMemoryContext()));
+        }
+
+        public static IHistoryLogic CreateHistoryLogic()
+        {
+            return new HistoryLogic(new HistoryRepository(new HistoryDatabaseContext()));
         }
     }
 }

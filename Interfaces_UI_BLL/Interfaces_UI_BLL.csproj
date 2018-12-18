@@ -45,6 +45,7 @@
     <Compile Include="IArticleLogic.cs" />
     <Compile Include="ICategoryLogic.cs" />
     <Compile Include="IFileLogic.cs" />
+    <Compile Include="IHistoryLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

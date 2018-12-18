@@ -14,7 +14,11 @@ namespace Football_Insider.Controllers
     {
         //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
         private IArticleLogic logic = LogicFactory.CreateArticleLogic();
+        private IHistoryLogic HLogic = LogicFactory.CreateHistoryLogic();
+
+        
         ArticleViewModel articleViewModel = new ArticleViewModel();
+        HistoryViewModel historyViewModel = new HistoryViewModel();
 
         // GET: CMS
         public ActionResult Dashboard()
@@ -32,7 +36,23 @@ namespace Football_Insider.Controllers
             {
                 throw invalidCastException;
             }
-            
+        }
+
+        public ActionResult History()
+        {
+            try
+            {
+                historyViewModel.Histories = HLogic.GetHistories();
+                return View(historyViewModel);
+            }
+            catch (SqlException sqlException)
+            {
+                throw sqlException;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                throw invalidCastException;
+            }
         }
     }
 }

@@ -43,11 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IContext\IArticleContext.cs" />
+    <Compile Include="IContext\IHistoryContext.cs" />
     <Compile Include="IRepository\IArticleRepository.cs" />
     <Compile Include="IContext\ICategoryContext.cs" />
     <Compile Include="IRepository\ICategoryRepository.cs" />
     <Compile Include="IContext\IFileContext.cs" />
     <Compile Include="IRepository\IFileRepository.cs" />
+    <Compile Include="IRepository\IHistoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
