@@ -13,7 +13,7 @@ namespace Football_Insider.Controllers
     public class CMSController : Controller
     {
         //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
-        private IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
+        private IArticleLogic logic = LogicFactory.CreateArticleLogic();
         ArticleViewModel articleViewModel = new ArticleViewModel();
 
         // GET: CMS

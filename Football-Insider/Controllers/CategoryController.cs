@@ -14,8 +14,8 @@ namespace Football_Insider.Controllers
     public class CategoryController : Controller
     {
         //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
-        private ICategoryLogic Clogic = LogicFactory.CreateCategoryMemoryLogic();
-        private IArticleLogic Alogic = LogicFactory.CreateArticleMemoryLogic();
+        private ICategoryLogic Clogic = LogicFactory.CreateCategoryLogic();
+        private IArticleLogic Alogic = LogicFactory.CreateArticleLogic();
         CategoryViewModel cateogryViewModel = new CategoryViewModel();
 
         public ActionResult AddCategory(int id)

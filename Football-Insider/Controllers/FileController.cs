@@ -14,7 +14,7 @@ namespace Football_Insider.Controllers
     public class FileController : Controller
     {
         //Bepaal hier of je de Database of de Mock Up Database wilt gebruiken.
-        private IFileLogic Flogic = LogicFactory.CreateFileMemoryLogic();
+        private IFileLogic Flogic = LogicFactory.CreateFileLogic();
 
         public ActionResult AddFile()
         {
