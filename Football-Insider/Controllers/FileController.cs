@@ -34,7 +34,7 @@ namespace Football_Insider.Controllers
                         if (file != null)
                         {
                             var InputFileName = Path.GetFileName(file.FileName);
-                            var ServerSavePath = Path.Combine(Server.MapPath("~/UploadedFiles/") + InputFileName);
+                            var ServerSavePath = Path.Combine(Server.MapPath("/UploadedFiles/") + InputFileName);
                             //Save file to server folder  
                             file.SaveAs(ServerSavePath);
                             ServerSavePath = "/UploadedFiles/" + InputFileName;

@@ -21,15 +21,16 @@ namespace Football_Insider
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/ScrollScript.js"));
+                "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                "~/Scripts/respond.js",
+                "~/Scripts/ScrollScript.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Site.css"
-                      ));
-
+                      "~/Content/Site.css",
+                      "~/Content/fontawesome/font-awesome.css"));
         }
     }
 }

@@ -298,7 +298,6 @@ namespace DAL.Context
             {
                 try
                 {
-                    connection.Open();
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         Int32 rowsAffected;

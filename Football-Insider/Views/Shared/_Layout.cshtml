@@ -4,11 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Homepage</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Styles.Render("~/Content/fontawesome")
-    @Scripts.Render("~/bundles/jquery")
-
+    @Styles.Render("~/Content/bootstrap.css")    
+    @Styles.Render("~/Content/Site.css")    
+    @Styles.Render("~/Content/fontawesome/font-awesome.css")
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner">
@@ -54,8 +52,12 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/respond.js")
+    @Scripts.Render("~/Scripts/ScrollScript.js")
+    @Scripts.Render("~/Scripts/Filter.js")
     @RenderSection("scripts", required: false)
+    @RenderSection("styles", required: false)
 </body>
 </html>
