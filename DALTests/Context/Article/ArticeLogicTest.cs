@@ -26,24 +26,7 @@ namespace DAL.Contexts.Tests
 
             //Assert
             Assert.AreEqual(expected, actual);
-        }       
-
-        [TestMethod()]
-        public void GetAllCategories()
-        {
-            //Arrange
-            ICategoryLogic logic = LogicFactory.CreateCategoryMemoryLogic();
-            List<Category> AllCategories = logic.GetAllCategories();
-
-            //Act
-            int expected = 5;
-            int actual = AllCategories.Count();
-
-
-            //Assert
-            Assert.AreEqual(expected, actual);
-
-        }       
+        }              
 
         [TestMethod()]
         public void GetCurrentArticle()
@@ -77,18 +60,6 @@ namespace DAL.Contexts.Tests
 
             //Assert
             Assert.AreEqual(expected, actual);
-
-        }
-
-        [TestMethod()]
-        public void AddArticle()
-        {
-            //Arrange
-            IArticleLogic logic = LogicFactory.CreateArticleMemoryLogic();
-
-            //Act
-
-            //Assert
 
         }
     }
