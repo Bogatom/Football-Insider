@@ -30,11 +30,11 @@ namespace Football_Insider.Controllers
             }
             catch (SqlException sqlException)
             {
-                throw sqlException;
+                return View("Error", sqlException);
             }
             catch (InvalidCastException invalidCastException)
             {
-                throw invalidCastException;
+                return View("Error", invalidCastException);
             }
         }
 
@@ -47,11 +47,11 @@ namespace Football_Insider.Controllers
             }
             catch (SqlException sqlException)
             {
-                throw sqlException;
+                return View("Error", sqlException);
             }
             catch (InvalidCastException invalidCastException)
             {
-                throw invalidCastException;
+                return View("Error", invalidCastException);
             }
         }
     }
