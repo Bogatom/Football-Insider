@@ -9,7 +9,7 @@ using Interfaces_BLL_DAL;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class ArticleMemoryContext : IArticleContext
     {

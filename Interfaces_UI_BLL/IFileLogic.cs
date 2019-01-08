@@ -13,5 +13,6 @@ namespace Interfaces_UI_BLL
         FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path);
         FileModel DeleteFile(int ArticleID, int FileID);
         FileModel GetCurrentFile(int ArticleID, string File);
+        List<FileModel> GetAllFiles();
     }
 }

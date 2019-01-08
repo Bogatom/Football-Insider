@@ -8,7 +8,7 @@ using MDL;
 using System.Web;
 using Interfaces_BLL_DAL;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class ArticleDatabaseContext : IArticleContext
     {

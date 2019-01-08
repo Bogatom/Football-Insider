@@ -70,6 +70,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Context\Article\ArticeLogicTest.cs" />
+    <Compile Include="Context\Category\CategoryLogicTest.cs" />
+    <Compile Include="Context\File\FileLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

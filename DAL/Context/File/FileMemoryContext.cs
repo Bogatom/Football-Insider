@@ -9,10 +9,12 @@ using System.Web;
 using Interfaces_BLL_DAL;
 using MDL;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class FileMemoryContext : IFileContext
     {
+        private List<FileModel> fileModels = new List<FileModel>();
+
         LocalConnection LocalDatabase = new LocalConnection();
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
@@ -112,6 +114,50 @@ namespace DAL.Context
                     }
                     connection.Close();
                     return fileModel;
+                }
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
+            }
+        }
+
+        public List<FileModel> GetAllFiles()
+        {
+
+            string query = "SELECT * FROM [Files]";
+            var model = new List<FileModel>();
+
+            using (SqlConnection connection = new SqlConnection(LocalDatabase.GetConnectionString()))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var fileModel = new FileModel
+                                {
+                                    File_ID = Convert.ToInt32(reader["File_ID"]),
+                                    FilePath = reader["FilePath"].ToString()
+                                };
+
+                                model.Add(fileModel);
+                                model.ToList();
+                                fileModels = model;
+                            }
+                        }
+
+                        connection.Close();
+                    }
+                    return fileModels;
                 }
                 catch (SqlException sqlException)
                 {

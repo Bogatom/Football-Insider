@@ -72,5 +72,23 @@ namespace DAL
                 throw;
             }
         }
+
+        public List<FileModel> GetAllFiles()
+        {
+            try
+            {
+                return _context.GetAllFiles();
+            }
+            catch (SqlException sqlException)
+            {
+                Console.WriteLine(sqlException);
+                throw;
+            }
+            catch (InvalidCastException invalidCastException)
+            {
+                Console.WriteLine(invalidCastException);
+                throw;
+            }
+        }
     }
 }

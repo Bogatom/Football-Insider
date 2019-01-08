@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Interfaces_BLL_DAL;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class CategoryMemoryContext : ICategoryContext
     {

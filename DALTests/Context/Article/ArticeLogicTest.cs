@@ -41,9 +41,7 @@ namespace DAL.Contexts.Tests
 
             //Assert
             Assert.AreEqual(expected, actual);
-
         }
-     
 
         [TestMethod()]
         public void EditArticle()
@@ -60,7 +58,6 @@ namespace DAL.Contexts.Tests
 
             //Assert
             Assert.AreEqual(expected, actual);
-
         }
     }
 }

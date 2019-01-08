@@ -13,5 +13,6 @@ namespace Interfaces_BLL_DAL
         FileModel AddFile(HttpPostedFileBase File, int ArticleID, string Path);
         FileModel DeleteFile(int ArticleID, int FileID);
         FileModel GetCurrentFile(int ArticleID, string File);
+        List<FileModel> GetAllFiles();
     }
 }

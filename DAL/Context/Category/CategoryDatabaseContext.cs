@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MDL;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class CategoryDatabaseContext : ICategoryContext
     {

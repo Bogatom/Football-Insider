@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Interfaces_BLL_DAL;
 using MDL;
 
-namespace DAL.Context
+namespace DAL.Contexts
 {
     public class HistoryDatabaseContext : IHistoryContext
     {

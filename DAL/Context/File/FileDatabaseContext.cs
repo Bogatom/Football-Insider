@@ -9,11 +9,12 @@ using Interfaces_BLL_DAL;
 using System.Data.SqlClient;
 using System.Data;
 
-namespace DAL.Context.File
+namespace DAL.Contexts.File
 {
     public class FileDatabaseContext : IFileContext
     {
         Connection database = new Connection();
+        private List<FileModel> fileModels = new List<FileModel>();
 
         public FileModel AddFile(HttpPostedFileBase file, int ArticleId, string Path)
         {
@@ -121,5 +122,50 @@ namespace DAL.Context.File
                 }
             }
         }
+        public List<FileModel> GetAllFiles()
+        {
+
+            string query = "SELECT * FROM [Files]";
+            var model = new List<FileModel>();
+
+            using (SqlConnection connection = new SqlConnection(database.GetConnectionString()))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var fileModel = new FileModel
+                                {
+                                    Article_ID = Convert.ToInt32(reader["Article_ID"]),
+                                    File_ID = Convert.ToInt32(reader["File_ID"]),
+                                    FilePath = reader["FilePath"].ToString()
+                                };
+
+                                model.Add(fileModel);
+                                model.ToList();
+                                fileModels = model;
+                            }
+                        }
+
+                        connection.Close();
+                    }
+                    return fileModels;
+                }
+                catch (SqlException sqlException)
+                {
+                    throw sqlException;
+                }
+                catch (InvalidCastException invalidCastException)
+                {
+                    throw invalidCastException;
+                }
+            }
+        }
+
     }
 }
